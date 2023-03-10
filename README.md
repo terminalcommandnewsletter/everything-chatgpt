@@ -39,7 +39,7 @@ ChatGPT is a NextJS application. Server information cannot be clearly found as t
 
 ## Data
 ### Session data
-A request can be made to `/api/auth/session` (literally, **in your browser**, however cannot work in an iframe or something similar because it doesn't have a `Access-Control-Allow-Origin` set up) to access data like the following:
+A request can be made to `/api/auth/session` (literally, **in your browser**, however cannot work in an iframe or fetch because it doesn't have a `Access-Control-Allow-Origin` set up) to access data like the following:
 
 ```
  user
