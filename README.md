@@ -149,6 +149,28 @@ That looks something like this.
 
 What Markdown features ChatGPT's Markdown renderer supports can be seen in [markdown-support.csv](./markdown-support.csv)
 
+**EDIT:** I looked through the source code (minified) for references to "Markdown". I found mentions of "mdastPlugins" and of the below plugins:
+
+- `change-plugins-to-remark-plugins`
+
+- `change-renderers-to-components`
+
+- `remove-buggy-html-in-markdown-parser`
+
+- `change-source-to-children`
+
+- `replace-allownode-allowedtypes-and-disallowedtypes`
+
+- `change-includenodeindex-to-includeelementindex`
+
+The ChatGPT web app uses [react-markdown](https://github.com/remarkjs/react-markdown/) to convert Markdown to React.
+
+The renderer (according to ChatGPT, because React is being used) is `rehype-react`, a renderer that takes an rehype tree (which is a modified version of the mdast tree) and converts it into a React component hierarchy. It allows you to define custom React components for each type of HTML element, which gives you full control over how the Markdown content is rendered in your application.
+
+`react-markdown` is built on top of `rehype-react` and provides a higher-level interface for rendering Markdown content in a React application. It handles the parsing of Markdown content into an `mdast` tree using `remark`, and then passes the `mdast` tree to `rehype-react` for rendering as React components.
+
+(The 2 paragraphs above were written by ChatGPT.)
+
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
 
