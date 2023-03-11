@@ -147,6 +147,8 @@ ChatGPT renders text using Markdown - not really. You have to use it in a really
 That looks something like this.
 ![The user asking the prompt above. ChatGPT responds with a heading "Markdown in ChatGPT". It says "This is soooooooo cool" (soooooooo in bold). Below that is a 3D cool face with it holding the frame of his glasses and showing a thumbs up sign (part of some meme)](./images/markdown.png)
 
+What Markdown features ChatGPT's Markdown renderer supports can be seen in [markdown-support.csv](./markdown-support.csv)
+
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
 
