@@ -1,0 +1,22 @@
+Feature,Supported,Note
+Heading,Yes,N/A
+Bold,Yes,N/A
+Italic,Yes,N/A
+Blockquote,Yes,N/A
+Ordered List,Yes,N/A
+Unordered List,Yes,N/A
+Code,Yes,N/A
+Horizontal Rule,Yes,Very faint
+Link,Yes,N/A
+Image,Yes,N/A
+Table,Yes,N/A
+Fenced Code Block,Yes,N/A
+Footnote,Yes,N/A
+Heading ID,No,N/A
+Definition List,No,N/A
+Strikethrough,Yes,N/A
+Task List,Yes,N/A
+Emoji,No,Worked once
+Highlight,No,N/A
+Subscript,Yes,N/A
+Superscript,Yes,N/A

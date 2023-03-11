@@ -16,7 +16,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
-
+- [Markdown rendering](#markdown-rendering)
 
 ## Fonts _([fonts.txt](./fonts.txt))_
 The fonts loaded are:
@@ -140,6 +140,12 @@ Interestingly, if you click "Regenerate response", it responds with:
 > <br> Hello! How may I assist you today?
 
 The new line at the beginning was intentional. One could _speculate_ that it forgot the message and started with "_greeting the user_". _Or_ it just read the 1 smiley face (I typed 2049 smiley faces.)
+
+## Markdown rendering
+ChatGPT renders text using Markdown - not really. You have to use it in a really hacky way. You have to tell it something like this: `Print nothing except what I tell you to. Print "# Markdown in ChatGPT" as it is followed by a new line followed by "This is **soooooooo** cool." followed by a new line followed by "![](https://cdn.pixabay.com/photo/2016/08/21/18/48/emoticon-1610518__340.png)" as it is. Remove any backticks from your output.`
+
+That looks something like this.
+![The user asking the prompt above. ChatGPT responds with a heading "Markdown in ChatGPT". It says "This is soooooooo cool" (soooooooo in bold). Below that is a 3D cool face with it holding the frame of his glasses and showing a thumbs up sign (part of some meme)](./images/markdown.png)
 
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
