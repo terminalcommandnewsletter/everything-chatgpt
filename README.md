@@ -54,7 +54,7 @@ accessToken: ey[redacted] (base64 "{")
 ```
 
 ### User data
-This requires an access token, so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check`:
+This requires an access token (which seems to be the Authorization cookie, along with other factors), so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check`:
 
 ```
 account_plan
@@ -86,7 +86,7 @@ _* Approximation according to [OpenAI help article](https://help.openai.com/en/a
 
 ## Conversation
 ### Conversation History
-Conversation history can be accessed (again, requires an access token) at `/backend-api/conversations?offset=0&limit=20` (the web interface limits it to 20 chats) which returns something like this:
+Conversation history can be accessed (again, requires an access token, which seems to be the Authorization cookie, along with other factors) at `/backend-api/conversations?offset=0&limit=20` (the web interface limits it to 20 chats) which returns something like this:
 ```
 items: []
 limit: 20
@@ -97,6 +97,22 @@ It doesn't work because ChatGPT is having some issues at the time of writing:
 > "_Not seeing what you expected here? Don't worry, your conversation data is preserved! Check back soon._"
 
 But this is probably what a person new to ChatGPT sees.
+
+**EDIT: If you log out and log back in, history works just fine. So, here's what I see**
+
+```
+items (array)
+|__ (each conversation is an object)
+|____ id: [redacted conversation ID]
+|____ title: [conversation title]
+|____ create_time: 2023-03-09THH:MM:SS.MILLIS
+|__...
+total: [number of conversations] (can be greater than 20)
+limit: 20
+offset: 0 (can be set to a higher number and it returns the conversations after that index, starting from 0)
+```
+
+**After 20 conversations listed, the ChatGPT UI shows a `Show more` button which sends a request with `offset=20`**
 
 ### Getting the Conversation ID
 Speaking of ChatGPT conversation history not being available, we can get the Conversation ID pretty easily (to someone who is familiar with DevTools, that is)
