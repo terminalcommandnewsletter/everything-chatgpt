@@ -14,6 +14,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [Conversation History](#conversation-history)
   - [Getting the Conversation ID](#getting-the-conversation-id)
   - [Loading a Past Conversation](#loading-a-past-conversation)
+  - [The process of ChatGPT responding](#the-process-of-chatgpt-responding)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -149,6 +150,67 @@ mapping (Object)
 |____ parent: <parent message ID>
 |____ children (Array): <child message ID(s)>
 ```
+
+### The process of ChatGPT responding
+Let's say I ask ChatGPT a question `"What is ChatGPT?"`. First, we make a POST request to `/backend-api/conversation` with a request body like this (no response):
+```
+action: next
+messages (Array):
+|__ (Object):
+|____ author (Object):
+|______ role: user
+|____ content (Object):
+|______ content_type: text
+|______ parts (Array):
+|________ What is ChatGPT?
+|__ id: 0c[redacted]91
+|__ role: user
+model: text-davinci-002-render-sha
+parent_message_id: a0[redacted]7f
+```
+
+Then [we get a list of past conversations](#conversation-history) that includes one "New chat".
+
+Then we make a request to `/backend-api/moderations` with a request body like this:
+
+```
+conversation_id: 05[redacted]2d
+input:	What is ChatGPT?
+message_id: 0c[redacted]91
+model: text-moderation-playground
+```
+
+That returns a response like this:
+
+```
+flagged:	false
+blocked:	false
+moderation_id	modr-6t[redacted]Bk
+```
+
+Then we make a request to `/backend-api/conversation/gen_title/<conversation ID>` with the request body like this:
+```
+message_id: c8[redacted]0e
+model: text-davinci-002-render-sha
+```
+
+That gets a response like this:
+```
+title: <title for conversation>
+```
+
+Then we make **another** request to `/backend-api/moderations` with a request body that includes the AI response (marked as `<AI response>`) looking like this:
+
+```
+input: \nWhat is ChatGPT?\n\n<AI response>
+model: text-moderation-playground
+conversation_id: 05[redacted]2d
+message_id: c8[redacted]0e
+```
+
+That gets a response in the exact same format as the previous request made to this path.
+
+Then [we **finally** get a list of past conversations](#conversation-history) including the proper title of the chat that appears on the sidebar.
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
