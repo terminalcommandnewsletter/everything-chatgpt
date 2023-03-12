@@ -14,7 +14,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [Conversation History](#conversation-history)
   - [Getting the Conversation ID](#getting-the-conversation-id)
   - [Loading a Past Conversation](#loading-a-past-conversation)
-  - [The process of ChatGPT responding](#the-process-of-chatgpt-responding)
+  - [The process of asking ChatGPT a question](#the-process-of-asking-chatgpt-a-question)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -151,7 +151,7 @@ mapping (Object)
 |____ children (Array): <child message ID(s)>
 ```
 
-### The process of ChatGPT responding
+### The process of asking ChatGPT a question
 Let's say I ask ChatGPT a question `"What is ChatGPT?"`. First, we make a POST request to `/backend-api/conversation` with a request body like this (no response):
 ```
 action: next
