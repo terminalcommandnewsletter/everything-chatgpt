@@ -13,6 +13,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
 - [Conversation](#conversation)
   - [Conversation History](#conversation-history)
   - [Getting the Conversation ID](#getting-the-conversation-id)
+  - [Loading a Past Conversation](#loading-a-past-conversation)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -122,6 +123,32 @@ Why? Because ChatGPT forces you into a /chat path for a new conversation, create
 1. We get the Conversation ID using DevTools (this requires a message to be sent)
 ![A ChatGPT window with Firefox DevTools open. In the list of requests, a request with the conversation ID can be seen. In addition, a request to a moderations endpoint has a response containing the conversation ID, along with the user's entered text 'How can I say "MOOOOOOOOOOOOOOOOOOO" as a cow in the terminal?'](./images/Getting-Conversation-ID.png)
 2. Then, we visit `https://chat.openai.com/chat/<chat ID here>`.
+
+### Loading a Past Conversation
+When the user clicks on a past conversation, a request is made (requiring an access token, likely the cookie with other factors to ensure genuine requests) to `/backend-api/conversation/<conversation ID>` with a response like this:
+
+```
+title: <Title of Conversation>
+create_time: EPOCHEPOCH.MILLIS
+mapping (Object)
+|__ <message ID> (Array):
+|____ id: <message ID>
+|____ message (Object):
+|______ id: <message ID>
+|______ author (Object):
+|________ role: system (First message) | user | assistant
+|________ metadata: (Empty object)
+|______ create_time: EPOCHEPOCH.MILLIS 
+|______ content (Object):
+|________ content_type: text
+|________ parts: [""]
+|______ end_turn: true (system) | false
+|______ weight: 1.0
+|______ metadata: {}
+|______ recipient: all
+|____ parent: <parent message ID>
+|____ children (Array): <child message ID(s)>
+```
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
