@@ -10,11 +10,13 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [Session data](#session-data)
   - [User data](#user-data)
   - [Model data](#model-data)
+  - [User data (using chat.json)](#user-data-using-chatjson)
 - [Conversation](#conversation)
   - [Conversation History](#conversation-history)
   - [Getting the Conversation ID](#getting-the-conversation-id)
   - [Loading a Past Conversation](#loading-a-past-conversation)
   - [The process of asking ChatGPT a question](#the-process-of-asking-chatgpt-a-question)
+  - [(Soft)Deleting a conversation](#softdeleting-a-conversation)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -69,6 +71,26 @@ user_country: [redacted two letter country code]
 features: ["system_message"]
 ```
 (Note: false in the above does not include quotes, whereas other values are in quotes, removed in the above _schema?_)
+
+### User data (using chat.json)
+When we make a request to `/_next/data/BO[redacted in case of possible unique identifier]KT/chat.json` (can be done in the browser, cannot be done without authentication), we get a response like this:
+```
+pageProps:
+|__ user (Object):
+|____ id: user-[redacted]
+|____ name: [redacted]@[redacted].com
+|____ email: [redacted]@[redacted].com
+|____ image: https://s.gravatar.com/avatar/8c[redacted in case of possible unique identifier]c7?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2F[first two letters of email address].png
+|____ picture: https://s.gravatar.com/avatar/8c[redacted in case of possible unique identifier]c7?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2F[first two letters of email address].png
+|____ groups: []
+|__ serviceStatus: {}
+|__ userCountry: [redacted two letter country code]
+|__ geoOk: false
+|__ isUserInCanPayGroup: true
+|__ __N_SSP: true
+```
+
+This is the some of the same data (excluding accessToken and expires, both relevant to an access token) you get using the method in [Session data](#session-data) except you also get info about the country the user is located in and whether ChatGPT Plus is available in their location.
 
 ### Model data
 What model does ChatGPT use? Well, just query `/backend-api/models`!
@@ -211,6 +233,13 @@ message_id: c8[redacted]0e
 That gets a response in the exact same format as the previous request made to this path.
 
 Then [we **finally** get a list of past conversations](#conversation-history) including the proper title of the chat that appears on the sidebar.
+
+### (Soft)Deleting a conversation
+When you click Delete on a conversation, a PATCH request is made to `/backend-api/conversation/05[redacted]2d` with the body `is_visible: false` and gets a response of `success: true` back. This implies that a conversation is being soft-deleted, not deleted on their systems.
+
+Then (not sure why), we visit chat.json (mentioned in [User data (using chat.json)](#user-data-using-chatjson)).
+
+After that, we [get the list of conversations that appear on the sidebar](#conversation-history).
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
