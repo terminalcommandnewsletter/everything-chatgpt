@@ -17,6 +17,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [Loading a Past Conversation](#loading-a-past-conversation)
   - [The process of asking ChatGPT a question](#the-process-of-asking-chatgpt-a-question)
   - [(Soft)Deleting a conversation](#softdeleting-a-conversation)
+  - [Leaving Feedback on Messages](#leaving-feedback-on-messages)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -240,6 +241,41 @@ When you click Delete on a conversation, a PATCH request is made to `/backend-ap
 Then (not sure why), we visit chat.json (mentioned in [User data (using chat.json)](#user-data-using-chatjson)).
 
 After that, we [get the list of conversations that appear on the sidebar](#conversation-history).
+
+### Leaving Feedback on Messages
+When you click the thumbs up/thumbs down button on a message, a POST request is made to `/backend-api/conversation/message_feedback` with the request body like this:
+```
+conversation_id: 94[redacted]9b
+message_id: 96[redacted]b7
+rating: thumbsUp | thumbsDown
+```
+That receives a response like this:
+```
+message_id: 96[redacted]b7
+conversation_id: 94[redacted]9b
+user_id: user-[redacted]
+rating: thumbsUp | thumbsDown
+content: {}
+```
+
+Then, when you type feedback and click submit, a request is made to the same path with a request body like this:
+```
+conversation_id: 94[redacted]9b
+message_id: 96[redacted]b7
+rating: thumbsUp
+tags: [] (for thumbsDown, an array containing any or all of these: harmful, false, not-helpful)
+text: <Feedback here>
+```
+With a response similar to the one above, with only the `content` field different:
+```
+message_id: 96[redacted]b7
+conversation_id: 94[redacted]9b
+user_id: user-[redacted]
+rating: thumbsUp
+content: '{"text": "<Feedback here>"}' |'{"text": "This is solely for testing purposes. You can safely ignore this feedback.", "tags": ["harmful", "false", "not-helpful"]}' (This is for a thumbsDown review)
+```
+
+**Note: When I have uBlock Origin on, a request is made to `https://o33249.ingest.sentry.io/api/45[redacted]48/envelope/?sentry_key=33[redacted]40&sentry_version=7&sentry_client=sentry.javascript.react/7.21.1` (blocked, hiding request/response body) when leaving feedback. If I disable uBO on `chat.openai.com`, a request isn't even attempted to that URL.**
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
