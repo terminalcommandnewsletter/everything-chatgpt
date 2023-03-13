@@ -1,7 +1,7 @@
 # Everything ChatGPT
 > A project by [@tercmd](https://twitter.com/tercmd)
 
-Explore what happens under the hood with the ChatGPT web app. And some speculation, of course. Create a pull request if you find something interesting.
+Explore what happens under the hood with the ChatGPT web app. And some speculation, of course. [Contribute if you have something interesting related to ChatGPT](./CONTRIBUTING.md)
 
 ## Table of Contents
 - [Fonts (fonts.txt)](#fonts-fontstxt)
