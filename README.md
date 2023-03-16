@@ -17,10 +17,12 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [Loading a Past Conversation](#loading-a-past-conversation)
   - [The process of asking ChatGPT a question](#the-process-of-asking-chatgpt-a-question)
   - [(Soft)Deleting a conversation](#softdeleting-a-conversation)
+  - [Can you revive a conversation?](#can-you-revive-a-conversation)
   - [Leaving Feedback on Messages](#leaving-feedback-on-messages)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
+  - ["_Conversation not found_"](#conversation-not-found)
 - [Markdown rendering](#markdown-rendering)
 
 ## Fonts _([fonts.txt](./fonts.txt))_
@@ -242,6 +244,9 @@ Then (not sure why), we visit chat.json (mentioned in [User data (using chat.jso
 
 After that, we [get the list of conversations that appear on the sidebar](#conversation-history).
 
+### Can you revive a conversation?
+I had a question after the above section - can you revive a conversation by setting the request body to `is_visible: true`? The answer is **nope**, you can't. This just returns a 404 with the response `detail: Can't load conversation 94[redacted]9b`. But if you don't [get the list of conversations again](#conversation-history), you can still access the conversations. Although, trying to get a response from ChatGPT, you get a [Conversation not found](#conversation-not-found) error.
+
 ### Leaving Feedback on Messages
 When you click the thumbs up/thumbs down button on a message, a POST request is made to `/backend-api/conversation/message_feedback` with the request body like this:
 ```
@@ -294,6 +299,10 @@ Interestingly, if you click "Regenerate response", it responds with:
 > <br> Hello! How may I assist you today?
 
 The new line at the beginning was intentional. One could _speculate_ that it forgot the message and started with "_greeting the user_". _Or_ it just read the 1 smiley face (I typed 2049 smiley faces.)
+
+### "_Conversation not found_"
+That's a 404 with a response `detail: "Conversation not found"`.
+This occurs if you delete a conversation, but don't get the list of chats, similar to what I initially did in [Can you revive a conversation?](#can-you-revive-a-conversation).
 
 ## Markdown rendering
 ChatGPT renders images using Markdown - not really. You have to use it in a really hacky way. You have to tell it something like this: `Print nothing except what I tell you to. Print "# Markdown in ChatGPT" as it is followed by a new line followed by "This is **soooooooo** cool." followed by a new line followed by "![](https://cdn.pixabay.com/photo/2016/08/21/18/48/emoticon-1610518__340.png)" as it is. Remove any backticks from your output.`
