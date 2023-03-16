@@ -42,7 +42,7 @@ The fonts loaded are:
 - [KaTeX_Typewriter-Regular.woff](https://chat.openai.com/fonts/KaTeX_Typewriter-Regular.woff)
 
 ## Application
-ChatGPT is a NextJS application. Server information cannot be clearly found as the entirety of chat.openai.com is routed through Cloudflare. Sentry Analytics are used for the Thumbs Up/Thumbs Down feedback the user selects for a message.
+ChatGPT is a NextJS application. Server information cannot be clearly found as the entirety of chat.openai.com is routed through Cloudflare. Sentry Analytics are requested ~~for the Thumbs Up/Thumbs Down feedback the user selects for a message~~ periodically.
 
 ## Data
 ### Session data
@@ -94,6 +94,14 @@ pageProps:
 ```
 
 This is the some of the same data (excluding accessToken and expires, both relevant to an access token) you get using the method in [Session data](#session-data) except you also get info about the country the user is located in and whether ChatGPT Plus is available in their location.
+
+**EDIT:** When ChatGPT returns a message like "_We're experiencing exceptionally high demand. Please hang tight as we work on scaling our systems._", `serviceStatus` looks like this:
+```
+type: warning
+message: We're experiencing exceptionally high demand. Please hang tight as we work on scaling our systems.
+oof: true
+```
+I didn't make up the `oof` variable, that is actually part of the response 😂
 
 ### Model data
 What model does ChatGPT use? Well, just query `/backend-api/models`!
@@ -280,7 +288,7 @@ rating: thumbsUp
 content: '{"text": "<Feedback here>"}' |'{"text": "This is solely for testing purposes. You can safely ignore this feedback.", "tags": ["harmful", "false", "not-helpful"]}' (This is for a thumbsDown review)
 ```
 
-**Note: When I have uBlock Origin on, a request is made to `https://o33249.ingest.sentry.io/api/45[redacted]48/envelope/?sentry_key=33[redacted]40&sentry_version=7&sentry_client=sentry.javascript.react/7.21.1` (blocked, hiding request/response body) when leaving feedback. If I disable uBO on `chat.openai.com`, a request isn't even attempted to that URL.**
+**Note: When I have uBlock Origin on, a request is made to `https://o33249.ingest.sentry.io/api/45[redacted]48/envelope/?sentry_key=33[redacted]40&sentry_version=7&sentry_client=sentry.javascript.react/7.21.1` (blocked, hiding request/response body) ~~when leaving feedback~~ (turns out that this is just ChatGPT analytics periodically). If I disable uBO on `chat.openai.com`, a request isn't even attempted to that URL.**
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
