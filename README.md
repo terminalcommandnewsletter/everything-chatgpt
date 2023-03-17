@@ -24,6 +24,9 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
   - ["_Conversation not found_"](#conversation-not-found)
 - [Markdown rendering](#markdown-rendering)
+- [ChatGPT Plus](#chatgpt-plus)
+  - [GPT-4 for Free Users? (nope)](#gpt-4-for-free-users-nope)
+  - [Access ChatGPT when it's down](#access-chatgpt-when-its-down)
 
 ## Fonts _([fonts.txt](./fonts.txt))_
 The fonts loaded are:
@@ -343,6 +346,18 @@ The renderer (according to ChatGPT, because React is being used) is likely `rehy
 `react-markdown` is built on top of `rehype-react` and provides a higher-level interface for rendering Markdown content in a React application. It handles the parsing of Markdown content into an `mdast` tree using `remark`, and then passes the `mdast` tree to `rehype-react` for rendering as React components.
 
 (The 2 paragraphs above were written by ChatGPT.)
+
+## ChatGPT Plus
+### GPT-4 for Free Users? (nope)
+GPT-4 was released in early March of 2023. I noticed that in videos of Plus subscribers using GPT-4, the URL ended with `?model=gpt-4`. So I was wondering if one could just add this to the end of the URL and get access to GPT-4. As expected, **you can't**. [Every message sent](#the-process-of-asking-chatgpt-a-question) uses [`text-davinci-002-render-sha`](#model-data).
+
+### Access ChatGPT when it's down
+
+> **Warning**
+> I haven't tried it any more than this one time I recorded it (ChatGPT doesn't go down very often these days) so I'm not entirely certain whether this will work for you, but it's worth a shot!
+
+When ChatGPT is down, you get a screen telling you that ChatGPT is down (with an entertaining message from a [fixed list](./chatgpt-down-messages.txt)) **and an input field for Plus subscribers to get a personalised login link**. Could a non-Plus subscriber type in their email, click `Send link` and access ChatGPT? That would result in an email not being se-
+![A GIF of a user with the email sent, showing the request, and having a link in their email](./images/chatgpt-plus-login-link.gif)
 
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
