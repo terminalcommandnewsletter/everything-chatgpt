@@ -359,6 +359,8 @@ GPT-4 was released in early March of 2023. I noticed that in videos of Plus subs
 When ChatGPT is down, you get a screen telling you that ChatGPT is down (with an entertaining message from a [fixed list](./chatgpt-down-messages.txt)) **and an input field for Plus subscribers to get a personalised login link**. Could a non-Plus subscriber type in their email, click `Send link` and access ChatGPT? That would result in an email not being se-
 ![A GIF of a user with the email sent, showing the request, and having a link in their email](./images/chatgpt-plus-login-link.gif)
 
+This works by sending a request to `/backend-api/bypass/link` with the request body `email: <email>` and the response `status: success`.
+
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
 
