@@ -364,6 +364,7 @@ This works by sending a request to `/backend-api/bypass/link` with the request b
 
 ## Rendering Markdown _inside_ a code block
 I was asking ChatGPT to render images from Unsplash (using a URL and Markdown) based on my queries. Then, the image from the URL appeared for a split second before disappearing. I'm assuming that this is because of the Markdown renderer assuming that as Markdown until the code block was closed.
+
 ![A GIF showing ChatGPT typing out a code block with Markdown for rendering an image and it rendering an image for a split second before swapping back to the code block](./images/Markdown-in-code-block-rendered.gif)
 
 ## Conclusion
