@@ -18,7 +18,8 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [The process of asking ChatGPT a question](#the-process-of-asking-chatgpt-a-question)
   - [(Soft)Deleting a conversation](#softdeleting-a-conversation)
   - [Can you revive a conversation?](#can-you-revive-a-conversation)
-  - [Leaving Feedback on Messages](#leaving-feedback-on-messages)
+  - [Leaving Feedback on Messages (Thumbs Up/Thumbs Down)](#leaving-feedback-on-messages-thumbs-upthumbs-down)
+  - [Leaving Feedback (on Regenerated Responses)](#leaving-feedback-on-regenerated-responses)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -259,7 +260,7 @@ After that, we [get the list of conversations that appear on the sidebar](#conve
 ### Can you revive a conversation?
 I had a question after the above section - can you revive a conversation by setting the request body to `is_visible: true`? The answer is **nope**, you can't. This just returns a 404 with the response `detail: Can't load conversation 94[redacted]9b`. But if you don't [get the list of conversations again](#conversation-history), you can still access the conversations. Although, trying to get a response from ChatGPT, you get a [Conversation not found](#conversation-not-found) error.
 
-### Leaving Feedback on Messages
+### Leaving Feedback on Messages (Thumbs Up/Thumbs Down)
 When you click the thumbs up/thumbs down button on a message, a POST request is made to `/backend-api/conversation/message_feedback` with the request body like this:
 ```
 conversation_id: 94[redacted]9b
@@ -292,7 +293,29 @@ rating: thumbsUp
 content: '{"text": "<Feedback here>"}' |'{"text": "This is solely for testing purposes. You can safely ignore this feedback.", "tags": ["harmful", "false", "not-helpful"]}' (This is for a thumbsDown review)
 ```
 
-**Note: When I have uBlock Origin on, a request is made to `https://o33249.ingest.sentry.io/api/45[redacted]48/envelope/?sentry_key=33[redacted]40&sentry_version=7&sentry_client=sentry.javascript.react/7.21.1` (blocked, hiding request/response body) ~~when leaving feedback~~ (turns out that this is just ChatGPT analytics periodically). If I disable uBO on `chat.openai.com`, a request isn't even attempted to that URL.**
+### Leaving Feedback (on Regenerated Responses)
+When you regenerate a response, you get a feedback box like this:
+![Feedback box with the text "Was this response better or worse?" abd three buttons "Better", "Worse" and "Same"](./images/regenerated-response-feedback.png)
+
+The request body looks like this:
+```
+compare_step_start_time: 1679[redacted]
+completion_comparison_rating: new (for Better) | original (for Worse) | same (for Same)
+conversation_id: c7[redacted]f0
+feedback_start_time: 1679[redacted]
+feedback_version: inline_regen_feedback:a:1.0
+frontend_submission_time: 1679[redacted]
+new_completion_load_end_time: 1679[redacted]
+new_completion_load_start_time: 1679[redacted]000
+new_completion_placement: not-applicable
+new_message_id: 7b[redacted]4a
+original_message_id: eb[redacted]e2
+rating: none
+tags: []
+text: ""
+```
+
+That returns an empty response.
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
