@@ -18,6 +18,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [The process of asking ChatGPT a question](#the-process-of-asking-chatgpt-a-question)
   - [(Soft)Deleting a conversation](#softdeleting-a-conversation)
   - [Can you revive a conversation?](#can-you-revive-a-conversation)
+  - [Clearing Conversations](#clearing-conversations)
   - [Leaving Feedback on Messages (Thumbs Up/Thumbs Down)](#leaving-feedback-on-messages-thumbs-upthumbs-down)
   - [Leaving Feedback (on Regenerated Responses)](#leaving-feedback-on-regenerated-responses)
 - [Errors](#errors)
@@ -259,6 +260,17 @@ After that, we [get the list of conversations that appear on the sidebar](#conve
 
 ### Can you revive a conversation?
 I had a question after the above section - can you revive a conversation by setting the request body to `is_visible: true`? The answer is **nope**, you can't. This just returns a 404 with the response `detail: Can't load conversation 94[redacted]9b`. But if you don't [get the list of conversations again](#conversation-history), you can still access the conversations. Although, trying to get a response from ChatGPT, you get a [Conversation not found](#conversation-not-found) error.
+
+### Clearing Conversations
+I was a bit unsure if I should do this. But I looked through and did it anyway. (The below is almost a one-to-one copy of [(Soft)Deleting a conversation](#softdeleting-a-conversation), with minor changes)
+
+When you click Delete on a conversation, a PATCH request is made to `/backend-api/conversations` (conversation**s** rather than conversatio**n/05[redacted]2d**) with the body `is_visible: false` and gets a response of `success: true` back. This implies that conversations are being soft-deleted, not deleted on their systems.
+
+Then (not sure why), we visit chat.json (mentioned in [User data (using chat.json)](#user-data-using-chatjson)).
+
+After that, we [get the list of conversations that appear on the sidebar](#conversation-history).
+
+**Something funny:** If ChatGPT history is temporarily unavailable (returning an empty response), the app shows a message. But if your ChatGPT conversation history is blank anyway, you just see a message that history is temporarily unavailable.
 
 ### Leaving Feedback on Messages (Thumbs Up/Thumbs Down)
 When you click the thumbs up/thumbs down button on a message, a POST request is made to `/backend-api/conversation/message_feedback` with the request body like this:
