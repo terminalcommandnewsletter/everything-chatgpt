@@ -30,6 +30,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [GPT-4 for Free Users? (nope)](#gpt-4-for-free-users-nope)
   - [Access ChatGPT when it's down](#access-chatgpt-when-its-down)
 - [Rendering Markdown _inside_ a code block](#rendering-markdown-inside-a-code-block)
+- [Minified client-side JS](#minified-client-side-js)
 
 ## Fonts _([fonts.txt](./fonts.txt))_
 The fonts loaded are:
@@ -401,6 +402,11 @@ This works by sending a request to `/backend-api/bypass/link` with the request b
 I was asking ChatGPT to render images from Unsplash (using a URL and Markdown) based on my queries. Then, the image from the URL appeared for a split second before disappearing. I'm assuming that this is because of the Markdown renderer assuming that as Markdown until the code block was closed.
 
 ![A GIF showing ChatGPT typing out a code block with Markdown for rendering an image and it rendering an image for a split second before swapping back to the code block](./images/Markdown-in-code-block-rendered.gif)
+
+## Minified client-side JS
+> This category requires more contribution. [Contribute! (if you can)](./CONTRIBUTING.md)
+
+What about the scripts that are loaded on the client? Those are compiled using webpack. You can find attempts at unminifying those (and making more sense out of it) in the [client-side-js folder](./client-side-js/).
 
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
