@@ -128,7 +128,7 @@ _* Approximation according to [OpenAI help article](https://help.openai.com/en/a
 
 ## Conversation
 ### Conversation History
-Conversation history can be accessed (again, requires an access token, which seems to be the Authorization cookie, along with other factors) at `/backend-api/conversations?offset=0&limit=20` (the web interface limits it to 20 chats) which returns something like this:
+Conversation history can be accessed (again, requires an access token, which seems to be the Authorization header) at `/backend-api/conversations?offset=0&limit=20` (the web interface limits it to 20 chats) which returns something like this:
 ```
 items: []
 limit: 20
@@ -166,7 +166,7 @@ Why? Because ChatGPT forces you into a /chat path for a new conversation, create
 2. Then, we visit `https://chat.openai.com/chat/<chat ID here>`.
 
 ### Loading a Past Conversation
-When the user clicks on a past conversation, a request is made (requiring an access token, likely the cookie with other factors to ensure genuine requests) to `/backend-api/conversation/<conversation ID>` with a response like this:
+When the user clicks on a past conversation, a request is made (requiring an access token, ~~likely the cookie with other factors to ensure genuine requests~~ an Authorization header) to `/backend-api/conversation/<conversation ID>` with a response like this:
 
 ```
 title: <Title of Conversation>
