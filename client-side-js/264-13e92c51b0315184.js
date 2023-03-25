@@ -83,14 +83,14 @@ e.refreshApiKey = function(){
 
 // OAuth callback for plugins
 e.pluginOauthCallback = function(e,code,redirect_uri,accessToken) {
-    var i=new URLSearchParams({code:code,redirect_uri:redirect_uri});
-    return this.fetch("".concat("https://chat.openai.com/backend-api","/aip/p/").concat(e,"/user-settings/oauth/callback?").concat(i),{method:"GET",headers:(0,s.Z)({"Content-Type":"application/json"},this.getAuthHeader(accessToken))})
+    var urlSearchParams = new URLSearchParams({code:code,redirect_uri:redirect_uri});
+    return this.fetch("".concat("https://chat.openai.com/backend-api","/aip/p/").concat(e,"/user-settings/oauth/callback?").concat(urlSearchParams),{method:"GET",headers:(0,s.Z)({"Content-Type":"application/json"},this.getAuthHeader(accessToken))})
 }
 
 // Get Page Metadata
 e.getPageMetadata = function(objWithUri){
-    var t = objWithUri.url;
-    return this.fetch("".concat("https://chat.openai.com/backend-api","/opengraph/tags?url=").concat(encodeURIComponent(t)),{method:"GET",headers:(0,s.Z)({"Content-Type":"application/json"},this.getAuthHeader())})
+    var url = objWithUri.url;
+    return this.fetch("".concat("https://chat.openai.com/backend-api","/opengraph/tags?url=").concat(encodeURIComponent(url)),{method:"GET",headers:(0,s.Z)({"Content-Type":"application/json"},this.getAuthHeader())})
 }
 
 // Get Message Cap of Model (Turns out, the auth header isn't required, from what I can tell)
