@@ -68,7 +68,7 @@ accessToken: ey[redacted] (base64 "{")
 ```
 
 ### User data
-This requires an access token (which seems to be the Authorization cookie, along with other factors), so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check`:
+This requires an access token (which seems to be the ~~Authorization cookie, along with other factors~~ Authorization header), so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check`:
 
 ```
 account_plan
