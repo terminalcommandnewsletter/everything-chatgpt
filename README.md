@@ -330,6 +330,11 @@ text: ""
 
 That returns an empty response.
 
+### Renaming Conversations
+When we rename a conversation, a PATCH request is made to `/backend-api/conversation/27[redacted]1d` with the request body like `{title: New Title}` and the response `{success:true}`.
+
+Then, [we get the list of conversations](#conversation-history) that contains the new title.
+
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
 That looks like a `429
