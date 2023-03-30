@@ -21,6 +21,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [Clearing Conversations](#clearing-conversations)
   - [Leaving Feedback on Messages (Thumbs Up/Thumbs Down)](#leaving-feedback-on-messages-thumbs-upthumbs-down)
   - [Leaving Feedback (on Regenerated Responses)](#leaving-feedback-on-regenerated-responses)
+  - [Renaming Conversations](#renaming-conversations)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
