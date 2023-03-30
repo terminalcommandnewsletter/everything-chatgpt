@@ -32,6 +32,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [Access ChatGPT when it's down](#access-chatgpt-when-its-down)
 - [Rendering Markdown _inside_ a code block](#rendering-markdown-inside-a-code-block)
 - [Minified client-side JS](#minified-client-side-js)
+- [Statsig Feature Gates](#statsig-feature-gates)
 
 ## Fonts _([fonts.txt](./fonts.txt))_
 The fonts loaded are:
@@ -413,6 +414,28 @@ I was asking ChatGPT to render images from Unsplash (using a URL and Markdown) b
 > This category requires more contribution. [Contribute! (if you can)](./CONTRIBUTING.md)
 
 What about the scripts that are loaded on the client? Those are compiled using webpack. You can find attempts at unminifying those (and making more sense out of it) in the [client-side-js folder](./client-side-js/).
+
+## Statsig Feature Gates
+When the page is loaded (without uBlock Origin), a request is made to `https://featuregates.org/v1/initialize` with a body consisting of reversed Base64 with data like this:
+```
+{"user":{"userID":"user-[redacted]","privateAttributes":{"email":"[redacted]@[redacted].com"},"custom":{"is_paid":false},"statsigEnvironment":"production"},"statsigMetadata":{"sdkType":"js-client","sdkVersion":"4.32.0","stableID":"7a4[redacted]07e"},"sinceTime":[a few hours before I accessed ChatGPT in Epoch time in milliseconds]}
+```
+
+That gives us a response like this:
+```
+{"feature_gates":{},"dynamic_configs":{"tZk[redacted]+Q=":{"name":"tZk[redacted]+Q=","value":{},"rule_id":"prestart","group":"prestart","is_device_based":false,"is_experiment_active":false,"is_user_in_experiment":false,"secondary_exposures":[]},"Lnn[redacted]IwY=":{"name":"Lnn[redacted]IwY=","value":{},"rule_id":"prestart","group":"prestart","is_device_based":false,"is_experiment_active":false,"is_user_in_experiment":false,"secondary_exposures":[]},"QSf[redacted]t64=":{"name":"QSf[redacted]t64=","value":{"prompt_enabled":true},"rule_id":"61h[redacted]fSc","group":"61h[redacted]fSc","is_device_based":false,"is_experiment_active":true,"is_user_in_experiment":true,"secondary_exposures":[]},"JhJ[redacted]k1w=":{"name":"JhJ[redacted]k1w=","value":{},"rule_id":"prestart","group":"prestart","is_device_based":false,"is_experiment_active":false,"is_user_in_experiment":false,"secondary_exposures":[]},"PFe[redacted]3yc=":{"name":"PFe[redacted]3yc=","value":{"enable_v0_comparison_modal":true,"enable_v0_inline_regen_comparisons":true},"rule_id":"launchedGroup","group":"launchedGroup","is_device_based":false,"is_experiment_active":false,"is_user_in_experiment":false,"secondary_exposures":[]},"9wf[redacted]T1g=":{"name":"9wf[redacted]T1g=","value":{"use_tz_offset":true},"rule_id":"launchedGroup","group":"launchedGroup","is_device_based":false,"is_experiment_active":false,"is_user_in_experiment":false,"secondary_exposures":[]},"oDt[redacted]lQ4=":{"name":"oDt[redacted]lQ4=","value":{},"rule_id":"prestart","group":"prestart","is_device_based":false,"is_experiment_active":false,"is_user_in_experiment":false,"secondary_exposures":[]}},"layer_configs":{},"sdkParams":{},"has_updates":true,"generator":"scrapi-nest","time":[same timestamp from request],"evaluated_keys":{"userID":"user-[redacted]","stableID":"7a4[redacted]07e"}}
+```
+
+Before you ask, I tried decoding every single Base64 string you can see above and it just had some random characters with control characters interjected.
+
+Then we request `https://events.statsigapi.net/v1/rgstr` with the body like this:
+```
+{"events":[{"eventName":"statsig::diagnostics","user":{"userID":"user-[redacted]","custom":{"is_paid":false},"statsigEnvironment":"production"},"value":null,"metadata":{"context":"initialize","markers":[{"key":"overall","step":null,"action":"start","value":null,"timestamp":3768},{"key":"initialize","step":"network_request","action":"start","value":null,"timestamp":3769},{"key":"initialize","step":"network_request","action":"end","value":200,"timestamp":4639},{"key":"initialize","step":"process","action":"start","value":null,"timestamp":4640},{"key":"initialize","step":"process","action":"end","value":null,"timestamp":4641},{"key":"overall","step":null,"action":"end","value":null,"timestamp":4642}]},"time":[when I  accessed ChatGPT],"statsigMetadata":{"currentPage":"https://chat.openai.com/chat"}}],"statsigMetadata":{"sdkType":"js-client","sdkVersion":"4.32.0","stableID":"7a4[redacted]07e"}}
+```
+
+That returns a 202 with a body of `{"success": true}`
+
+For some reason, this request repeats after that.
 
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
