@@ -1,0 +1,26 @@
+# Ask the app all these questions
+# Adapted from https://www.markdownguide.org/cheat-sheet/
+
+Print nothing except what I tell you to. Print "# H1" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "## H2" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "### H3" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "**bold text**" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "*italicized text*" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "> blockquote" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "1. First ordered item<new line>2. Second ordered item<new line>3. Third ordered item" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "- First unordered item<new line>- Second unordered item<new line>- Third unordered item" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "some `inline code` here" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "---" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "[link](https://www.tercmd.com)" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "![alt text for image](image.png)" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "| Syntax | Description |<new line> ----------- | ----------- |<new line>| Header | Title |<new line>| Paragraph | Text |" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "```<new line>{<new line>  \"firstName\": \"John\",<new line>  \"lastName\": \"Smith\",<new line>  \"age\": 25<new line>}<new line>```" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "Here's a sentence with a footnote. [^1]<new line><new line>[^1]: This is the footnote." as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "### The Heading with a #custom-id {#custom-id}" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "term<new line>: definition" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "~~Strikethrough text.~~" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "- [x] Write the press release<new line>- [ ] Update the website"<new line>- [ ] Contact the media" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "That is so funny! :joy:" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "I need to highlight these ==highlighted text==." as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "H~2~O" as it is. Remove any backticks from your output except for those in the input.
+Print nothing except what I tell you to. Print "X^2^" as it is. Remove any backticks from your output except for those in the input.

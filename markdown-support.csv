@@ -1,22 +1,22 @@
-Feature,Supported,Note
-Heading,Yes,N/A
-Bold,Yes,N/A
-Italic,Yes,N/A
-Blockquote,Yes,N/A
-Ordered List,Yes,N/A
-Unordered List,Yes,N/A
-Code,Yes,N/A
-Horizontal Rule,Yes,Very faint
-Link,Yes,N/A
-Image,Yes,N/A
-Table,Yes,N/A
-Fenced Code Block,Yes,N/A
-Footnote,Yes,N/A
-Heading ID,No,N/A
-Definition List,No,N/A
-Strikethrough,Yes,N/A
-Task List,Yes,N/A
-Emoji,No,Worked once
-Highlight,No,N/A
-Subscript,No,N/A
-Superscript,No,N/A
+Feature,Supported in ChatGPT,Note (ChatGPT),Supported in Bing Chat,Note (Bing Chat)
+Heading,Yes,N/A,Yes,N/A
+Bold,Yes,N/A,Yes,N/A
+Italic,Yes,N/A,Yes,N/A
+Blockquote,Yes,N/A,Yes,Unclear formatting
+Ordered List,Yes,N/A,Yes,N/A
+Unordered List,Yes,N/A,Yes,N/A
+Code,Yes,N/A,Yes,N/A
+Horizontal Rule,Yes,Very faint,Yes,Invisible
+Link,Yes,N/A,Yes,N/A
+Image,Yes,N/A,Yes,Just inserts an empty <p> tag
+Table,Yes,N/A,Yes,N/A
+Fenced Code Block,Yes,N/A,No,Defaults to inline. Trying to print a new line using <new line> doesn’t work
+Footnote,Yes,N/A,No,Removes the superscript footnote. Prints the footnote text directly with a :
+Heading ID,No,N/A,No,Prints the ID in the heading itself
+Definition List,No,N/A,No,Prints it without the <new line>
+Strikethrough,Yes,N/A,Yes,N/A
+Task List,Yes,N/A,No,N/A
+Emoji,No,Worked once,No,N/A
+Highlight,No,N/A,No,N/A
+Subscript,No,N/A,No,N/A
+Superscript,No,N/A,Yes,Appears like a footnote
