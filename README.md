@@ -1,6 +1,8 @@
 # Everything ChatGPT
 > A project by [@tercmd](https://twitter.com/tercmd)
 
+![Stars for the Everything ChatGPT repo](https://img.shields.io/github/stars/terminalcommandnewsletter/everything-chatgpt?style=for-the-badge&logo=github)
+
 Explore what happens under the hood with the ChatGPT web app. And some speculation, of course. [Contribute if you have something interesting related to ChatGPT](./CONTRIBUTING.md)
 
 ## Table of Contents
@@ -443,3 +445,5 @@ This is it. For now. As I see more details of ChatGPT, I'll add those in.
 Check out [@OpenAI_Support](https://twitter.com/OpenAI_Support) (a **parody** account) for more OpenAI and ChatGPT related content.
 
 Check me out on [Twitter](https://twitter.com/tercmd), or perhaps [my website (terminal-styled)](https://tercmd.com).
+
+[![Share on Twitter!](https://img.shields.io/badge/Share%20on%20Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fl.tercmd.com%2FkJ9fS2)
