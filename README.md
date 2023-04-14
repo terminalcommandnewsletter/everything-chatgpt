@@ -37,20 +37,34 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
 - [Statsig Feature Gates](#statsig-feature-gates)
 
 ## Fonts _([fonts.txt](./fonts.txt))_
-The fonts loaded are:
-- [Signifier-Regular.otf](https://chat.openai.com/fonts/Signifier-Regular.otf)
-- [Sohne-Buch.otf](https://chat.openai.com/fonts/Sohne-Buch.otf)
-- [Sohne-Halbfett.otf](https://chat.openai.com/fonts/Sohne-Halbfett.otf)
-- [SohneMono-Buch.otf](https://chat.openai.com/fonts/SohneMono-Buch.otf)
-- [SohneMono-Halbfett.otf](https://chat.openai.com/fonts/SohneMono-Halbfett.otf)
-- [KaTeX_Caligraphic-Bold.woff](https://chat.openai.com/fonts/KaTeX_Caligraphic-Bold.woff) (_Caligraphic-Regular_ for Regular font)
-- [KaTeX_Fraktur-Bold.woff](https://chat.openai.com/fonts/KaTeX_Fraktur-Bold.woff) (_Fraktur-Regular_ for Regular font)
-- [KaTeX_Main-Bold.woff](https://chat.openai.com/fonts/KaTeX_Main-Bold.woff) (_BoldItalic_, _Italic_, _Regular_ for font weights you can probably guess)
-- [KaTeX_Math-Bold.woff](https://chat.openai.com/fonts/KaTeX_Math-Bold.woff) (_BoldItalic_, _Italic_, _Regular_ for font weights you can probably guess)
-- [KaTeX_SansSerif-Bold.woff](https://chat.openai.com/fonts/KaTeX_SansSerif-Bold.woff) (_Italic_, _Regular_ for font weights you can probably guess)
-- [KaTeX_Script-Regular.woff](https://chat.openai.com/fonts/KaTeX_Script-Regular.woff)
-- [KaTeX_Size1-Regular.woff](https://chat.openai.com/fonts/KaTeX_Size1-Regular.woff) (_Size1_, _Size2_, _Size3_, _Size4_)
-- [KaTeX_Typewriter-Regular.woff](https://chat.openai.com/fonts/KaTeX_Typewriter-Regular.woff)
+> **Warning**
+> **All fonts in the previous list are no longer accessible at the `https://chat.openai.com/fonts/[font]` endpoint. The new fonts.txt file assumes the prefix of the URLs to be `https://cdn.openai.com/common/fonts/`**
+
+**This is a _non exhaustive_ list of fonts that come from cdn.openai.com:**
+- [soehne-buch.woff2](https://cdn.openai.com/common/fonts/soehne/soehne-buch.woff2)
+- [soehne-halbfett.woff2](https://cdn.openai.com/common/fonts/soehne/soehne-halbfett.woff2)
+- [soehne-mono-buch.woff2](https://cdn.openai.com/common/fonts/soehne/soehne-mono-buch.woff2)
+- [soehne-mono-halbfett.woff2](https://cdn.openai.com/common/fonts/soehne/soehne-mono-halbfett.woff2)
+- [KaTeX_Main-Regular.woff2](https://cdn.openai.com/common/fonts/katex/KaTeX_Main-Regular.woff2) (+ Main-Bold, Main-Italic, Main-BoldItalic)
+- [KaTeX_Math-Italic.woff2](https://cdn.openai.com/common/fonts/katex/KaTeX_Math-Italic.woff2) (+ Math-BoldItalic)
+- [KaTeX_Size2-Regular.woff2](https://cdn.openai.com/common/fonts/katex/KaTeX_Size2-Regular.woff2) (+ Size1, Size3, Size4)
+- [KaTeX_Caligraphic-Regular.woff2](https://cdn.openai.com/common/fonts/katex/KaTeX_Caligraphic-Regular.woff2) (+ Caligraphic-Bold)
+
+**Earlier list of fonts that are no longer accessible:**
+
+- ~~[Signifier-Regular.otf](https://chat.openai.com/fonts/Signifier-Regular.otf)~~
+- ~~[Sohne-Buch.otf](https://chat.openai.com/fonts/Sohne-Buch.otf)~~
+- ~~[Sohne-Halbfett.otf](https://chat.openai.com/fonts/Sohne-Halbfett.otf)~~
+- ~~[SohneMono-Buch.otf](https://chat.openai.com/fonts/SohneMono-Buch.otf)~~
+- ~~[SohneMono-Halbfett.otf](https://chat.openai.com/fonts/SohneMono-Halbfett.otf)~~
+- ~~[KaTeX_Caligraphic-Bold.woff](https://chat.openai.com/fonts/KaTeX_Caligraphic-Bold.woff) (_Caligraphic-Regular_ for Regular font)~~
+- ~~[KaTeX_Fraktur-Bold.woff](https://chat.openai.com/fonts/KaTeX_Fraktur-Bold.woff) (_Fraktur-Regular_ for Regular font)~~
+- ~~[KaTeX_Main-Bold.woff](https://chat.openai.com/fonts/KaTeX_Main-Bold.woff) (_BoldItalic_, _Italic_, _Regular_ for font weights you can probably guess)~~
+- ~~[KaTeX_Math-Bold.woff](https://chat.openai.com/fonts/KaTeX_Math-Bold.woff) (_BoldItalic_, _Italic_, _Regular_ for font weights you can probably guess)~~
+- ~~[KaTeX_SansSerif-Bold.woff](https://chat.openai.com/fonts/KaTeX_SansSerif-Bold.woff) (_Italic_, _Regular_ for font weights you can probably guess)~~
+- ~~[KaTeX_Script-Regular.woff](https://chat.openai.com/fonts/KaTeX_Script-Regular.woff)~~
+- ~~[KaTeX_Size1-Regular.woff](https://chat.openai.com/fonts/KaTeX_Size1-Regular.woff) (_Size1_, _Size2_, _Size3_, _Size4_)~~
+- ~~[KaTeX_Typewriter-Regular.woff](https://chat.openai.com/fonts/KaTeX_Typewriter-Regular.woff)~~
 
 ## Application
 ChatGPT is a NextJS application. Server information cannot be clearly found as the entirety of chat.openai.com is routed through Cloudflare. Sentry Analytics are requested ~~for the Thumbs Up/Thumbs Down feedback the user selects for a message~~ periodically. Statsig is attempted to be loaded but CORS blocks it due to the Same Origin Policy **(actually an effect of uBlock Origin)**.
