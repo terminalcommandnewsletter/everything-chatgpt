@@ -177,11 +177,11 @@ offset: 0 (can be set to a higher number and it returns the conversations after 
 ### Getting the Conversation ID
 Speaking of ChatGPT conversation history not being available, we can get the Conversation ID pretty easily (to someone who is familiar with DevTools, that is)
 
-Why? Because ChatGPT forces you into a /chat path for a new conversation, creates a conversation, **BUT DOESN'T CHANGE THE URL**. This is also helpful when chat history isn't available.
+Why? Because ChatGPT forces you into a ~~/chat~~ `/` path for a new conversation, creates a conversation, **BUT DOESN'T CHANGE THE URL**. This is also helpful when chat history isn't available.
 
 1. We get the Conversation ID using DevTools (this requires a message to be sent)
 ![A ChatGPT window with Firefox DevTools open. In the list of requests, a request with the conversation ID can be seen. In addition, a request to a moderations endpoint has a response containing the conversation ID, along with the user's entered text 'How can I say "MOOOOOOOOOOOOOOOOOOO" as a cow in the terminal?'](./images/Getting-Conversation-ID.png)
-2. Then, we visit `https://chat.openai.com/chat/<chat ID here>`.
+2. Then, we visit ~~`https://chat.openai.com/chat/<chat ID here>`~~ `https://chat.openai.com/c/<chat ID here>`.
 
 ### Loading a Past Conversation
 When the user clicks on a past conversation, a request is made (requiring an access token, ~~likely the cookie with other factors to ensure genuine requests~~ an Authorization header) to `/backend-api/conversation/<conversation ID>` with a response like this:
