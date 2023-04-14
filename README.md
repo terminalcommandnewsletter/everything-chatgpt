@@ -138,6 +138,7 @@ models
 |____ title: Turbo (Default for free users)
 |____ description: The standard ChatGPT model
 |____ tags: []
+|____ qualitative_properties: {}
 ```
 
 This means that ChatGPT can _remember context (based on what I can understand)_ for 16388 characters or 3072.75 words (or 2048.5 😀s).
