@@ -12,7 +12,7 @@ Explore what happens under the hood with the ChatGPT web app. And some speculati
   - [Session data](#session-data)
   - [User data](#user-data)
   - [Model data](#model-data)
-  - [User data (using chat.json)](#user-data-using-chatjson)
+  - [User data (using ~~chat.json~~ [chatId].json)](#user-data-using-chatjson-chatidjson)
 - [Conversation](#conversation)
   - [Conversation History](#conversation-history)
   - [Getting the Conversation ID](#getting-the-conversation-id)
@@ -100,8 +100,8 @@ features: ["system_message"]
 ```
 (Note: false in the above does not include quotes, whereas other values are in quotes, removed in the above _schema?_)
 
-### User data (using chat.json)
-When we make a request to `/_next/data/BO[redacted in case of possible unique identifier]KT/chat.json` (can be done in the browser, cannot be done without authentication), we get a response like this:
+### User data (using ~~chat.json~~ [chatId].json)
+When we make a request to `/_next/data/[build ID]/c/[conversation ID].json?chatId=[conversation ID]` (can be done in the browser, cannot be done without authentication), we get a response like this:
 ```
 pageProps:
 |__ user (Object):
@@ -274,7 +274,7 @@ Then [we **finally** get a list of past conversations](#conversation-history) in
 ### (Soft)Deleting a conversation
 When you click Delete on a conversation, a PATCH request is made to `/backend-api/conversation/05[redacted]2d` with the body `is_visible: false` and gets a response of `success: true` back. This implies that a conversation is being soft-deleted, not deleted on their systems.
 
-Then (not sure why), we visit chat.json (mentioned in [User data (using chat.json)](#user-data-using-chatjson)).
+Then (not sure why), we visit `/_next/data/[build ID]/index.json` (with the same data as [[chatId].json](#user-data-using-chatjson-chatidjson)).
 
 After that, we [get the list of conversations that appear on the sidebar](#conversation-history).
 
@@ -286,7 +286,7 @@ I was a bit unsure if I should do this. But I looked through and did it anyway. 
 
 When you click Delete on a conversation, a PATCH request is made to `/backend-api/conversations` (conversation**s** rather than conversatio**n/05[redacted]2d**) with the body `is_visible: false` and gets a response of `success: true` back. This implies that conversations are being soft-deleted, not deleted on their systems.
 
-Then (not sure why), we visit chat.json (mentioned in [User data (using chat.json)](#user-data-using-chatjson)).
+Then (not sure why), we visit `/_next/data/[build ID]/index.json` (with the same data as [[chatId].json](#user-data-using-chatjson-chatidjson)).~~
 
 After that, we [get the list of conversations that appear on the sidebar](#conversation-history).
 
