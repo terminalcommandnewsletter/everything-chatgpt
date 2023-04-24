@@ -1,9 +1,13 @@
-# Everything ChatGPT
-> A project by [@tercmd](https://twitter.com/tercmd)
+<div align="center">
 
-![Stars for the Everything ChatGPT repo](https://img.shields.io/github/stars/terminalcommandnewsletter/everything-chatgpt?style=for-the-badge&logo=github)
+  # Everything ChatGPT
+  <i>A project by [@tercmd (on Twitter)](https://twitter.com/tercmd)</i>
 
-Explore what happens under the hood with the ChatGPT web app. And some speculation, of course. [Contribute if you have something interesting related to ChatGPT](./CONTRIBUTING.md)
+  ![Stars for the Everything ChatGPT repo](https://img.shields.io/github/stars/terminalcommandnewsletter/everything-chatgpt?style=for-the-badge&logo=github)
+
+  Explore what happens under the hood with the ChatGPT web app. And some speculation, of course. [Contribute if you have something interesting related to ChatGPT.](./CONTRIBUTING.md)
+
+</div>
 
 ## Table of Contents
 - [Fonts (fonts.txt)](#fonts-fontstxt)
