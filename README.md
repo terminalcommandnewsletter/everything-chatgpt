@@ -17,6 +17,7 @@
   - [User data](#user-data)
   - [User data (using ~~chat.json~~ [chatId].json)](#user-data-using-chatjson-chatidjson)
   - [Model data](#model-data)
+  - [Disabling/Enabling "Chat History & Training"](#disablingenabling-chat-history--training)
 - [Conversation](#conversation)
   - [Conversation History](#conversation-history)
   - [Getting the Conversation ID](#getting-the-conversation-id)
@@ -149,6 +150,15 @@ This means that ChatGPT can _remember context (based on what I can understand)_ 
 
 _* Approximation according to [OpenAI help article](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)_
 
+### Disabling/Enabling "Chat History & Training"
+When you click your name/email address in the bottom-left corner of the screen (on desktop) > Settings > Show (next to Data Controls) > toggle next to Chat History and Training, the following happens:
+
+First, [the list of conversations is requested](#conversation-history).
+
+Then we make a request to the same path as [Model data](#model-data), except a query parameter is added to the URL `?history_and_training_disabled=true` or `?history_and_training_disabled=false` depending on whether the setting is disabled or enabled respectively.
+
+Then, we request `/_next/data/[build ID]/index.json` (with the same data as [[chatId].json](#user-data-using-chatjson-chatidjson)).
+
 ## Conversation
 ### Conversation History
 Conversation history can be accessed (again, requires an access token, which seems to be the Authorization header) at `/backend-api/conversations?offset=0&limit=20` (the web interface limits it to 20 chats) which returns something like this:
@@ -278,7 +288,7 @@ Then [we **finally** get a list of past conversations](#conversation-history) in
 ### (Soft)Deleting a conversation
 When you click Delete on a conversation, a PATCH request is made to `/backend-api/conversation/05[redacted]2d` with the body `is_visible: false` and gets a response of `success: true` back. This implies that a conversation is being soft-deleted, not deleted on their systems.
 
-Then (not sure why), we visit `/_next/data/[build ID]/index.json` (with the same data as [[chatId].json](#user-data-using-chatjson-chatidjson)).
+Then (not sure why), we request `/_next/data/[build ID]/index.json` (with the same data as [[chatId].json](#user-data-using-chatjson-chatidjson)).
 
 After that, we [get the list of conversations that appear on the sidebar](#conversation-history).
 
@@ -290,7 +300,7 @@ I was a bit unsure if I should do this. But I looked through and did it anyway. 
 
 When you click Delete on a conversation, a PATCH request is made to `/backend-api/conversations` (conversation**s** rather than conversatio**n/05[redacted]2d**) with the body `is_visible: false` and gets a response of `success: true` back. This implies that conversations are being soft-deleted, not deleted on their systems.
 
-Then (not sure why), we visit `/_next/data/[build ID]/index.json` (with the same data as [[chatId].json](#user-data-using-chatjson-chatidjson)).~~
+Then (not sure why), we request `/_next/data/[build ID]/index.json` (with the same data as [[chatId].json](#user-data-using-chatjson-chatidjson)).~~
 
 After that, we [get the list of conversations that appear on the sidebar](#conversation-history).
 
