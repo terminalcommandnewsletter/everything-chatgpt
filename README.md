@@ -165,6 +165,25 @@ When you use the "Export data" feature to export your data, a POST request is ma
 
 As the name suggests, a data export is sent by email.
 
+The data export is a `.zip` file containing `user.json`, `conversations.json`, `message_feedback.json`, `model_comparisons.json`, `chat.html`.
+
+The data in `user.json` looks like this:
+```json
+{"id": "user-[redacted]", "email": "[redacted]@[redacted].com", "chatgpt_plus_user": false, "phone_number": "+[redacted]"}
+```
+
+Sample data for `model_comparisons.json` is in [sample/model_comparisons.json](./sample/model_comparisons.json)
+
+Sample data for `message_feedback.json`:
+```json
+[{"message_id": "[redacted]", "conversation_id": "[conversationidwithoutdashes]", "user_id": "user-[redacted]", "rating": "thumbsUp", "content": "{\"text\": \"This is a test.\"}"}]
+```
+
+Sample data for `conversations.json` is in [sample/conversations.json](./sample/conversations.json)
+
+`chat.html` is a page that dynamically (using client-side JS) displays entire chat history for every conversation saved using conversation data (stored in the file) similar to that from `conversations.json`. You can find a sample in [sample/chat.html](./sample/chat.html)
+
+
 ## Conversation
 ### Conversation History
 Conversation history can be accessed (again, requires an access token, which seems to be the Authorization header) at `/backend-api/conversations?offset=0&limit=20` (the web interface limits it to 20 chats) which returns something like this:
