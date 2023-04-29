@@ -18,6 +18,7 @@
   - [User data (using ~~chat.json~~ [chatId].json)](#user-data-using-chatjson-chatidjson)
   - [Model data](#model-data)
   - [Disabling/Enabling "Chat History & Training"](#disablingenabling-chat-history--training)
+  - [Data Export](#data-export)
 - [Conversation](#conversation)
   - [Conversation History](#conversation-history)
   - [Getting the Conversation ID](#getting-the-conversation-id)
@@ -158,6 +159,11 @@ First, [the list of conversations is requested](#conversation-history).
 Then we make a request to the same path as [Model data](#model-data), except a query parameter is added to the URL `?history_and_training_disabled=true` or `?history_and_training_disabled=false` depending on whether the setting is disabled or enabled respectively.
 
 Then, we request `/_next/data/[build ID]/index.json` (with the same data as [[chatId].json](#user-data-using-chatjson-chatidjson)).
+
+### Data Export
+When you use the "Export data" feature to export your data, a POST request is made to `/backend-api/accounts/data_export` with no request body and the response of `status: "queued"`.
+
+As the name suggests, a data export is sent by email.
 
 ## Conversation
 ### Conversation History
