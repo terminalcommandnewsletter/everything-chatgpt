@@ -1,0 +1,41 @@
+name: 'Correction'
+description: 'Report a correction (grammar and spelling, etc.) for the repo (NOT out-of-date information. Use the Out-of-date information template for that)'
+title: 'Correction: '
+labels: ["correction"]
+assignees:
+  - terminalcommandnewsletter
+body:
+  - type: markdown
+    attributes:
+      value: 'Note: This issue template is **NOT** for out-of-date information. For out-of-date information, use the "Out-of-date information" template.'
+  - type: checkboxes
+    attributes:
+      label: 'Is there an existing issue for this?'
+      description: 'Please search to see if an issue already exists for the correction you have.'
+      options:
+      - label: 'I have searched the existing issues'
+        required: true
+  - type: input
+    id: section-requiring-correction
+    attributes:
+      label: 'Section for Correction'
+      description: 'Which section requires correction?'
+      placeholder: 'e.g. User data, Application, etc.'
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: 'Correction'
+      description: 'What requires correction in the section?'
+      placeholder: 'Write a correction here...'
+    validations:
+      required: true
+  - type: checkboxes
+    id: contributing-md
+    attributes:
+      label: 'CONTRIBUTING.md'
+      description: 'By submitting this issue, I agree that I have read the `CONTRIBUTING.md` of this repo and this issue adheres to those guidelines.'
+      options:
+        - label: I have read the `CONTRIBUTING.md`
+          required: true

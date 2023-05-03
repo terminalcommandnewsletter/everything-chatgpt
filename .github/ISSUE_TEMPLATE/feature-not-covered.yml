@@ -1,0 +1,46 @@
+name: 'Feature not covered'
+description: 'Report a feature in the ChatGPT web app not covered in the repo'
+title: "Feature not covered: "
+labels: ["enhancement"]
+assignees:
+  - terminalcommandnewsletter
+body:
+  - type: checkboxes
+    attributes:
+      label: 'Is there an existing issue for this?'
+      description: 'Please search to see if an issue already exists for the feature not being covered in the repo.'
+      options:
+      - label: 'I have searched the existing issues'
+        required: true
+  - type: input
+    id: missing-feature
+    attributes:
+      label: 'Missing Feature'
+      description: 'What is the missing feature?'
+      placeholder: 'e.g. Data Export'
+    validations:
+      required: true
+  - type: textarea
+    id: feature-info
+    attributes:
+      label: 'Add more info about the feature'
+      description: 'Additional information'
+      placeholder: 'e.g. The feature makes a POST request to ...'
+    validations:
+      required: true
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 'Optionally, add more information'
+      description: 'Additional information'
+      placeholder: 'More information...'
+    validations:
+      required: false
+  - type: checkboxes
+    id: contributing-md
+    attributes:
+      label: 'CONTRIBUTING.md'
+      description: 'By submitting this issue, I agree that I have read the `CONTRIBUTING.md` of this repo and this issue adheres to those guidelines.'
+      options:
+        - label: I have read the `CONTRIBUTING.md`
+          required: true

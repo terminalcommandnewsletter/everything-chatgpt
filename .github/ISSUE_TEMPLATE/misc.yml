@@ -1,0 +1,33 @@
+name: 'Miscellaneous'
+description: 'If none of the other issue templates match, use this template (ensure that there is no other template suitable for the issue)'
+title: 'Misc: '
+labels: ["misc"]
+assignees:
+  - terminalcommandnewsletter
+body:
+  - type: markdown
+    attributes:
+      value: 'Note: Please ensure that there is no other template suitable for the issue.'
+  - type: checkboxes
+    attributes:
+      label: 'Is there an existing issue for this?'
+      description: 'Please search to see if an issue already exists for the correction you have.'
+      options:
+      - label: 'I have searched the existing issues'
+        required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: 'Issue'
+      description: 'Issue text'
+      placeholder: 'Write issue content here...'
+    validations:
+      required: true
+  - type: checkboxes
+    id: contributing-md
+    attributes:
+      label: 'CONTRIBUTING.md'
+      description: 'By submitting this issue, I agree that I have read the `CONTRIBUTING.md` of this repo and this issue adheres to those guidelines.'
+      options:
+        - label: I have read the `CONTRIBUTING.md`
+          required: true

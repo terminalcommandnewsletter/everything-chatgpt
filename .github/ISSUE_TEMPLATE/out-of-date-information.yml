@@ -1,0 +1,54 @@
+name: 'Out-of-date information'
+description: 'Report out-of-date information'
+title: 'Section out-of-date: '
+labels: ["out-of-date"]
+assignees:
+  - terminalcommandnewsletter
+body:
+  - type: checkboxes
+    attributes:
+      label: 'Is there an existing issue for this?'
+      description: 'Please search to see if an issue already exists for the out-of-date information you encountered.'
+      options:
+      - label: 'I have searched the existing issues'
+        required: true
+  - type: input
+    id: out-of-date-section
+    attributes:
+      label: 'Out-of-date Section'
+      description: 'Which section is out of date?'
+      placeholder: 'e.g. User data, Application, etc.'
+    validations:
+      required: true
+  - type: textarea
+    id: incorrect-info
+    attributes:
+      label: 'Incorrect info'
+      description: 'What is incorrect in the section?'
+      placeholder: 'In the "[section]" section, as of DD/MM/YYYY, [information] is out-of-date.'
+    validations:
+      required: true
+  - type: textarea
+    id: correct-info
+    attributes:
+      label: 'Optionally, provide the correct info'
+      description: 'What should be there instead?'
+      placeholder: 'The correct information for the section could look like this: '
+    validations:
+      required: false
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 'Optionally, add more information'
+      description: 'Additional information'
+      placeholder: 'More information...'
+    validations:
+      required: false
+  - type: checkboxes
+    id: contributing-md
+    attributes:
+      label: 'CONTRIBUTING.md'
+      description: 'By submitting this issue, I agree that I have read the `CONTRIBUTING.md` of this repo and this issue adheres to those guidelines.'
+      options:
+        - label: I have read the `CONTRIBUTING.md`
+          required: true
