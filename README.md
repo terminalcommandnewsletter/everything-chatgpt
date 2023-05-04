@@ -501,3 +501,8 @@ Check out [@OpenAI_Support](https://twitter.com/OpenAI_Support) (a **parody** ac
 Check me out on [Twitter](https://twitter.com/tercmd), or perhaps [my website (terminal-styled)](https://tercmd.com).
 
 [![Share on Twitter!](https://img.shields.io/badge/Share%20on%20Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fl.tercmd.com%2FkJ9fS2)
+
+## License
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Everything ChatGPT</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://www.tercmd.com" property="cc:attributionName" rel="cc:attributionURL">tercmd.com</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+You may find a copy of the license in the [`LICENSE`](./LICENSE) file.
