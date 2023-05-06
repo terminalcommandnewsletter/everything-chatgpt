@@ -186,10 +186,10 @@ Sample data for `conversations.json` is in [sample/conversations.json](./sample/
 
 ## Conversation
 ### Conversation History
-Conversation history can be accessed (again, requires an access token, which seems to be the Authorization header) at `/backend-api/conversations?offset=0&limit=20` (the web interface limits it to 20 chats) which returns something like this:
+Conversation history can be accessed (again, requires an access token, which seems to be the Authorization header) at `/backend-api/conversations?offset=0&limit=28` (the web interface limits it to 28 chats) which returns something like this:
 ```
 items: []
-limit: 20
+limit: 28
 offset: 0
 total: 0
 ```
@@ -207,12 +207,12 @@ items (array)
 |____ title: [conversation title]
 |____ create_time: 2023-03-09THH:MM:SS.MILLIS
 |__...
-total: [number of conversations] (can be greater than 20)
-limit: 20
+total: [number of conversations] (can be greater than 28)
+limit: 28
 offset: 0 (can be set to a higher number and it returns the conversations after that index, starting from 0)
 ```
 
-**After 20 conversations listed, the ChatGPT UI shows a `Show more` button which sends a request with `offset=20`**
+**After 28 conversations listed, the ChatGPT UI shows a `Show more` button which sends a request with `offset=28`**
 
 ### Getting the Conversation ID
 Speaking of ChatGPT conversation history not being available, we can get the Conversation ID pretty easily (to someone who is familiar with DevTools, that is)
