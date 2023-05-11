@@ -250,7 +250,9 @@ mapping (Object)
 ```
 
 ### The process of asking ChatGPT a question
-Let's say I ask ChatGPT a question `"What is ChatGPT?"`. First, we make a POST request to `/backend-api/conversation` with a request body like this (no response):
+_This section has been corrected as per [issue #4](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/4) created by [@Snarik (on GitHub)](https://github.com/Snarik)._
+
+Let's say I ask ChatGPT a question `"What is ChatGPT?"`. First, we make a POST request to `/backend-api/conversation` with a request body like this:
 ```
 action: next
 messages (Array):
@@ -266,6 +268,8 @@ messages (Array):
 model: text-davinci-002-render-sha
 parent_message_id: a0[redacted]7f
 ```
+
+This responds with an EventStream which ends with a `[DONE]` signal. You can view a sample response in [sample/conversation-event-stream.txt](./sample/conversation-event-stream.txt).
 
 Then [we get a list of past conversations](#conversation-history) that includes one "New chat".
 
