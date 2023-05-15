@@ -2,6 +2,7 @@ soehne/soehne-buch.woff2
 soehne/soehne-halbfett.woff2
 soehne/soehne-mono-buch.woff2
 soehne/soehne-mono-halbfett.woff2
+soehne/soehne-kraftig.woff2
 katex/KaTeX_Main-Regular.woff2
 katex/KaTeX_Main-Bold.woff2
 katex/KaTeX_Main-Italic.woff2

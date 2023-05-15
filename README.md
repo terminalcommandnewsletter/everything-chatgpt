@@ -51,6 +51,7 @@
 - [soehne-halbfett.woff2](https://cdn.openai.com/common/fonts/soehne/soehne-halbfett.woff2)
 - [soehne-mono-buch.woff2](https://cdn.openai.com/common/fonts/soehne/soehne-mono-buch.woff2)
 - [soehne-mono-halbfett.woff2](https://cdn.openai.com/common/fonts/soehne/soehne-mono-halbfett.woff2)
+- [soehne-kraftig.woff2](https://cdn.openai.com/common/fonts/soehne/soehne-kraftig.woff2)
 - [KaTeX_Main-Regular.woff2](https://cdn.openai.com/common/fonts/katex/KaTeX_Main-Regular.woff2) (+ Main-Bold, Main-Italic, Main-BoldItalic)
 - [KaTeX_Math-Italic.woff2](https://cdn.openai.com/common/fonts/katex/KaTeX_Math-Italic.woff2) (+ Math-BoldItalic)
 - [KaTeX_Size2-Regular.woff2](https://cdn.openai.com/common/fonts/katex/KaTeX_Size2-Regular.woff2) (+ Size1, Size3, Size4)
@@ -135,17 +136,32 @@ oof: true
 I didn't make up the `oof` variable, that is actually part of the response 😂
 
 ### Model data
+_This section has been corrected as per [issue #8](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/8) created by [@0xdevalias (on GitHub)](https://github.com/0xdevalias)._
+
 What model does ChatGPT use? Well, just query `/backend-api/models`!
 ```
-models
-|__
-|____ slug: text-davinci-002-render-sha
-|____ max_tokens: 4097
-|____ title: Turbo (Default for free users)
-|____ description: The standard ChatGPT model
-|____ tags: []
-|____ qualitative_properties: {}
+models:
+|__ (Array)
+|____ (Object)
+|______ slug: text-davinci-002-render-sha
+|______ max_tokens: 8191
+|______ title: "Turbo (Default for free users)"
+|______ description: "Our fastest model, great for most everyday tasks."
+|______ tags:[],
+|______ qualitative_properties: {}
+categories:
+|__ (Array)
+|____ (Object)
+|______ category: "gpt_3.5"
+|______ human_category_name: "GPT-3.5"
+|______ subscription_level: "free"
+|______ default_model: "text-davinci-002-render-sha"
+|______ browsing_model: null
+|______ code_interpreter_model: null
+|______ plugins_model: null
 ```
+
+(There are more models if you use ChatGPT Plus, as shown in [issue #8](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/8), but this is what a Free user would see.)
 
 This means that ChatGPT can _remember context (based on what I can understand)_ for 16388 characters or 3072.75 words (or 2048.5 😀s).
 
