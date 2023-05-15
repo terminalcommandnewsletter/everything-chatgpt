@@ -93,6 +93,7 @@ accessToken: ey[redacted] (base64 "{")
 ```
 
 ### User data
+_This section has been corrected as per [issue #6](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/6) created by [@0xdevalias (on GitHub)](https://github.com/0xdevalias)._
 This requires an access token (which seems to be the ~~Authorization cookie, along with other factors~~ Authorization header), so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check`:
 
 ```
@@ -102,10 +103,13 @@ account_plan
 |__ account_user_role: account-owner
 |__ was_paid_customer: false
 |__ has_customer_object: false
+|__ subscription_expires_at_timestamp: null
 user_country: [redacted two letter country code]
-features: ["system_message"]
+features: ["data_export_enabled","dfw_message_feedback","dfw_inline_message_regen_comparison","new_model_switcher_20230512","data_deletion_enabled","show_existing_user_age_confirmation_modal","infinite_scroll_history","log_statsig_events","data_controls_enabled","log_intercom_events"]
 ```
 (Note: false in the above does not include quotes, whereas other values are in quotes, removed in the above _schema?_)
+
+Also, you would get many more items in the `features` array if you use ChatGPT Plus ([issue #6](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/6))
 
 ### User data (using ~~chat.json~~ [chatId].json)
 When we make a request to `/_next/data/[build ID]/c/[conversation ID].json?chatId=[conversation ID]` (can be done in the browser, cannot be done without authentication), we get a response like this:
