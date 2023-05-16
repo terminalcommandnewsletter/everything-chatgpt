@@ -30,6 +30,7 @@
   - [Leaving Feedback on Messages (Thumbs Up/Thumbs Down)](#leaving-feedback-on-messages-thumbs-upthumbs-down)
   - [Leaving Feedback (on Regenerated Responses)](#leaving-feedback-on-regenerated-responses)
   - [Renaming Conversations](#renaming-conversations)
+  - [Continuing a ChatGPT response](#continuing-a-chatgpt-response)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -416,6 +417,24 @@ That returns an empty response.
 When we rename a conversation, a PATCH request is made to `/backend-api/conversation/27[redacted]1d` with the request body like `{title: New Title}` and the response `{success:true}`.
 
 Then, [we get the list of conversations](#conversation-history) that contains the new title.
+
+### Continuing a ChatGPT response
+When we click `Continue response`, a `POST` request is made to `/backend-api/conversation` with a request body like this:
+```
+action: "continue"
+conversation_id: "63[redacted]a8"
+history_and_training_disabled: false
+model: "text-davinci-002-render-sha"
+parent_message_id: "af[redacted]67"
+supports_modapi: true
+timezone_offset_min: [minutes offset]
+```
+
+which returns an EventStream with lots of data like this:
+
+```
+data: {\"message\": {\"id\": \"ad[redacted]04\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": EPOCHEPOCH.MILLIS, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"<insert message here>\"]}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"message_type\": \"next\", \"model_slug\": \"text-davinci-002-render-sha\"}, \"recipient\": \"all\"}, \"conversation_id\": \"84[redacted]25\", \"error\": null}
+```
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
