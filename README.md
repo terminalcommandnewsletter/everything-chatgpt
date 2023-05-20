@@ -168,7 +168,7 @@ categories:
 
 (There are more models if you use ChatGPT Plus, as shown in [issue #8](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/8), but this is what a Free user would see.)
 
-This means that ChatGPT can _remember context (based on what I can understand)_ for 16388 characters or 3072.75 words (or 2048.5 😀s).
+This means that ChatGPT can _remember context (based on what I can understand)_ for 32764 characters or 6143.25 words (or 2048.5 😀s).
 
 _* Approximation according to [OpenAI help article](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)_
 
