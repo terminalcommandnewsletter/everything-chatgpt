@@ -31,6 +31,8 @@
   - [Leaving Feedback (on Regenerated Responses)](#leaving-feedback-on-regenerated-responses)
   - [Renaming Conversations](#renaming-conversations)
   - [Continuing a ChatGPT response](#continuing-a-chatgpt-response)
+  - [Sharing Conversations](#sharing-conversations)
+  - [Continuing a Shared Conversation](#continuing-a-shared-conversation)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -94,21 +96,46 @@ accessToken: ey[redacted] (base64 "{")
 ```
 
 ### User data
-_This section has been corrected as per [issue #9](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/9) created by [@0xdevalias (on GitHub)](https://github.com/0xdevalias)._
-This requires an access token (which seems to be the ~~Authorization cookie, along with other factors~~ Authorization header), so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check`:
+This requires an access token (which seems to be the ~~Authorization cookie, along with other factors~~ Authorization header), so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check/v4-2023-04-27` ~~(that URL's gonna be a regular pain to update)~~:
 
 ```
-account_plan
-|__ is_paid_subscription_active: false
-|__ subscription_plan: chatgptfreeplan
-|__ account_user_role: account-owner
-|__ was_paid_customer: false
-|__ has_customer_object: false
-|__ subscription_expires_at_timestamp: null
-user_country: [redacted two letter country code]
-features: ["data_export_enabled","dfw_message_feedback","dfw_inline_message_regen_comparison","new_model_switcher_20230512","data_deletion_enabled","show_existing_user_age_confirmation_modal","infinite_scroll_history","log_statsig_events","data_controls_enabled","log_intercom_events"]
+accounts: (Object)
+|__ default: (Object)
+|____ account: (Object)
+|______ account_user_role: "account-owner"
+|______ account_user_id: "92[redacted]40"
+|______ processor: (Object)
+|________ a001: (Object)
+|__________ has_customer_object: false
+|________ b001: (Object)
+|__________ has_transaction_history: false
+|______ account_id: "34[redacted]71"
+|______ is_most_recent_expired_subscription_gratis: false
+|______ has_previously_paid_subscription: false
+|____ features: (Array)
+|______ "log_intercom_events"
+|______ "infinite_scroll_history"
+|______ "new_model_switcher_20230512"
+|______ "arkose_enabled"
+|______ "data_controls_enabled"
+|______ "dfw_inline_message_regen_comparison"
+|______ "data_deletion_enabled"
+|______ "data_export_enabled"
+|______ "show_existing_user_age_confirmation_modal"
+|______ "log_statsig_events"
+|______ "shareable_links"
+|______ "dfw_message_feedback"
+|____ entitlement: (Object)
+|______ subscription_id: null
+|______ has_active_subscription: false
+|______ subscription_plan: "chatgptfreeplan"
+|______ expires_at: null
+|____ last_active_subscription: (Object)
+|______ subscription_id: null
+|______ purchase_origin_platform: "chatgpt_not_purchased"
+|______ will_renew: false
+temp_ap_available_at: "YYYY-MM-DDTHH:MM:SS+00:00"
 ```
-(Note: false in the above does not include quotes, whereas other values are in quotes, removed in the above _schema?_)
 
 Also, you would get many more items in the `features` array if you use ChatGPT Plus ([issue #9](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/9))
 
@@ -435,6 +462,59 @@ which returns an EventStream with lots of data like this:
 ```
 data: {\"message\": {\"id\": \"ad[redacted]04\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": EPOCHEPOCH.MILLIS, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"<insert message here>\"]}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"message_type\": \"next\", \"model_slug\": \"text-davinci-002-render-sha\"}, \"recipient\": \"all\"}, \"conversation_id\": \"84[redacted]25\", \"error\": null}
 ```
+
+### Sharing Conversations
+When the share button next to the conversation is clicked, a modal appears which sends a `POST` request to `/backend-api/share/create` with a request body like this:
+```
+conversation_id: "5a[redacted]5e"
+current_node_id: "1d[redacted]25"
+is_anonymous: true | false (depending on whether "Share anonymously" or "Share with name" is chosen)
+```
+and a response like this:
+```
+share_id: "37[redacted]05"
+share_url: "https://chat.openai.com/share/37[redacted]05"
+title: "<title here>"
+is_public: false
+is_visible: true
+is_anonymous: true
+highlighted_message_id: null
+current_node_id: "1d[redacted]25"
+already_exists: false
+moderation_state: {
+|__has_been_moderated: false
+|__has_been_blocked: false
+|__has_been_accepted: false
+|__has_been_auto_blocked: false
+|__has_been_auto_moderated: false
+}
+```
+
+When `Copy link` is clicked, a `PATCH` request is sent to `/backend-api/share/[conversation_id]` with a body like this (I selected "Share with name" which isn't reflected in the previous request):
+```
+highlighted_message_id: null
+is_anonymous: false
+is_public: true
+is_visible: true
+share_id: "37[redacted]05"
+title: "<title here>"
+```
+Which receives a response like this:
+```
+moderation_state: {
+  has_been_moderated: false
+  has_been_blocked: false
+  has_been_accepted: false
+  has_been_auto_blocked: false
+  has_been_auto_moderated: false
+}
+```
+
+Visiting the URL returns pre-rendered HTML of the conversation, with stylesheets being added after.
+
+### Continuing a Shared Conversation
+
+When clicking `Continue conversation`, a request is made to `/_next/data/P7slZS66cy3khXMWyp3GF/share/37[redacted]05/continue.json?shareParams=37[redacted]05&shareParams=continue` with no request data and a *very* long response including data similar to that from [### User data (using [chatId].json)](#user-data-using-chatjson-chatidjson) as well as data about the conversation shared.
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
