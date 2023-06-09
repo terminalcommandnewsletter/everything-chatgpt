@@ -33,6 +33,8 @@
   - [Continuing a ChatGPT response](#continuing-a-chatgpt-response)
   - [Sharing Conversations](#sharing-conversations)
   - [Continuing a Shared Conversation](#continuing-a-shared-conversation)
+  - [Listing Shared Conversations](#listing-shared-conversations)
+  - [Deleting a Shared Conversation](#deleting-a-shared-conversation)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -515,6 +517,29 @@ Visiting the URL returns pre-rendered HTML of the conversation, with stylesheets
 ### Continuing a Shared Conversation
 
 When clicking `Continue conversation`, a request is made to `/_next/data/P7slZS66cy3khXMWyp3GF/share/37[redacted]05/continue.json?shareParams=37[redacted]05&shareParams=continue` with no request data and a *very* long response including data similar to that from [### User data (using [chatId].json)](#user-data-using-chatjson-chatidjson) as well as data about the conversation shared.
+
+### Listing Shared Conversations
+A list of shared conversations can be found by sending a `GET` request (with the Authorization header to your auth token) to `/backend-api/shared_conversations?order=created` (without a request payload) which can return output like this:
+```
+ items: (Array)
+|__ (Object)
+|____ id: "37[redacted]05"
+|____ title: "<title here>"
+|____ create_time: "2023-06-DDTHH:MM:SS.MILLIS+00:00"
+|____ update_time: "2023-06-DDTHH:MM:SS+00:00"
+|____ mapping: null
+|____ current_node: null
+|____ conversation_id: "5a[redacted]5e"
+ total: 1
+ limit: 50
+ offset: 0
+ has_missing_conversations: false
+```
+
+### Deleting a Shared Conversation
+When you delete a shared conversation, a `DELETE` request is sent to `/backend-api/share/37[redacted]05` with no request body and the response `null`.
+
+After this, the web app [fetches the list of shared conversations](#listing-shared-conversations).
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
