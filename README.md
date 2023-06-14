@@ -554,10 +554,7 @@ That looks like a `413 Request Entity Too Large` error. The response looks like 
 detail: { message: "The message you submitted was too long, please reload the conversation and submit something shorter.", code: "message_length_exceeds_limit" }
 ```
 
-Interestingly, if you click "Regenerate response", it responds with:
-> <br> Hello! How may I assist you today?
-
-The new line at the beginning was intentional. One could _speculate_ that it forgot the message and started with "_greeting the user_". _Or_ it just read the 1 smiley face (I typed 2049 smiley faces.)
+**Edit:** The test I used in this section was poorly done and I've done better, further analysis of gpt-3.5-turbo in my [ai-memory-overflow repo](https://github.com/terminalcommandnewsletter/ai-memory-overflow) which also includes a program to generate large prompts to test models. If you could, please contribute data for new models to the repo.
 
 ### "_Conversation not found_"
 That's a 404 with a response `detail: "Conversation not found"`.
