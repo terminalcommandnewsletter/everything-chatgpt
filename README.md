@@ -174,25 +174,34 @@ _This section has been corrected as per [issue #8](https://github.com/terminalco
 
 What model does ChatGPT use? Well, just query `/backend-api/models`!
 ```
-models:
-|__ (Array)
-|____ (Object)
-|______ slug: text-davinci-002-render-sha
-|______ max_tokens: 8191
-|______ title: "Turbo (Default for free users)"
-|______ description: "Our fastest model, great for most everyday tasks."
-|______ tags:[],
-|______ qualitative_properties: {}
-categories:
-|__ (Array)
-|____ (Object)
-|______ category: "gpt_3.5"
-|______ human_category_name: "GPT-3.5"
-|______ subscription_level: "free"
-|______ default_model: "text-davinci-002-render-sha"
-|______ browsing_model: null
-|______ code_interpreter_model: null
-|______ plugins_model: null
+models: (Array)
+|__ (Object)
+|____ slug: "text-davinci-002-render-sha"
+|____ max_tokens: 8191
+|____ title: "Turbo (Default for free users)"
+|____ description: "Our fastest model, great for most everyday tasks."
+|____ tags: (Array)
+|______ "gpt3.5"
+|____ qualitative_properties: (Object)
+|____ capabilities: (Object)
+|__ (Object)
+|____ slug: "text-davinci-002-render-sha-mobile"
+|____ max_tokens: 8191
+|____ title: "Turbo (Default for free users)"
+|____ description: "Our fastest model, great for most everyday tasks."
+|____ tags: (Array)
+|______ "mobile"
+|____ qualitative_properties: (Object)
+|____ capabilities: (Object)
+ categories: (Array)
+|__ (Object)
+|____ category: "gpt_3.5"
+|____ human_category_name: "GPT-3.5"
+|____ subscription_level: "free"
+|____ default_model: "text-davinci-002-render-sha"
+|____ browsing_model: "text-davinci-002-render-sha-browsing"
+|____ code_interpreter_model: "text-davinci-002-render-sha-code-interpreter"
+|____ plugins_model: "text-davinci-002-render-sha-plugins"
 ```
 
 (There are more models if you use ChatGPT Plus, as shown in [issue #8](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/8), but this is what a Free user would see.)
