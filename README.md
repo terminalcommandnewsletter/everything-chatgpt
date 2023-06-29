@@ -44,7 +44,6 @@
   - [GPT-4 for Free Users? (nope)](#gpt-4-for-free-users-nope)
   - [Access ChatGPT when it's down](#access-chatgpt-when-its-down)
 - [Rendering Markdown _inside_ a code block](#rendering-markdown-inside-a-code-block)
-- [Minified client-side JS](#minified-client-side-js)
 - [Statsig Feature Gates](#statsig-feature-gates)
 
 ## Fonts _([fonts.txt](./fonts.txt))_
@@ -619,11 +618,6 @@ This works by sending a request to `/backend-api/bypass/link` with the request b
 I was asking ChatGPT to render images from Unsplash (using a URL and Markdown) based on my queries. Then, the image from the URL appeared for a split second before disappearing. I'm assuming that this is because of the Markdown renderer assuming that as Markdown until the code block was closed.
 
 ![A GIF showing ChatGPT typing out a code block with Markdown for rendering an image and it rendering an image for a split second before swapping back to the code block](./images/Markdown-in-code-block-rendered.gif)
-
-## Minified client-side JS
-> This category requires more contribution. [Contribute! (if you can)](./CONTRIBUTING.md)
-
-What about the scripts that are loaded on the client? Those are compiled using webpack. You can find attempts at unminifying those (and making more sense out of it) in the [client-side-js folder](./client-side-js/).
 
 ## Statsig Feature Gates
 When the page is loaded (without uBlock Origin), a request is made to `https://featuregates.org/v1/initialize` with a body consisting of reversed Base64 with data like this:
