@@ -97,7 +97,7 @@ accessToken: ey[redacted] (base64 "{")
 ```
 
 ### User data
-This requires an access token (which seems to be the ~~Authorization cookie, along with other factors~~ Authorization header), so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check/v4-2023-04-27` ~~(that URL's gonna be a regular pain to update)~~:
+This requires an access token passed through the `Authorization` header, so this cannot be accessed using your browser directly, but here's what we have when we make a request to `/backend-api/accounts/check/v4-2023-04-27` ~~(that URL's gonna be a regular pain to update)~~:
 
 ```
 accounts: (Object)
@@ -113,19 +113,20 @@ accounts: (Object)
 |______ account_id: "34[redacted]71"
 |______ is_most_recent_expired_subscription_gratis: false
 |______ has_previously_paid_subscription: false
+|______ name: null
+|______ structure: "personal"
 |____ features: (Array)
-|______ "log_intercom_events"
-|______ "infinite_scroll_history"
-|______ "new_model_switcher_20230512"
-|______ "arkose_enabled"
-|______ "data_controls_enabled"
-|______ "dfw_inline_message_regen_comparison"
-|______ "data_deletion_enabled"
-|______ "data_export_enabled"
-|______ "show_existing_user_age_confirmation_modal"
 |______ "log_statsig_events"
+|______ "log_intercom_events"
+|______ "new_plugin_oauth_endpoint"
+|______ "arkose_enabled"
+|______ "infinite_scroll_history"
+|______ "model_switcher_upsell"
 |______ "shareable_links"
+|______ "layout_may_2023"
 |______ "dfw_message_feedback"
+|______ "ios_disable_citation_menu"
+|______ "dfw_inline_message_regen_comparison"
 |____ entitlement: (Object)
 |______ subscription_id: null
 |______ has_active_subscription: false
@@ -135,10 +136,9 @@ accounts: (Object)
 |______ subscription_id: null
 |______ purchase_origin_platform: "chatgpt_not_purchased"
 |______ will_renew: false
-temp_ap_available_at: "YYYY-MM-DDTHH:MM:SS+00:00"
 ```
 
-Also, you would get many more items in the `features` array if you use ChatGPT Plus ([issue #9](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/9))
+The returned data is different if you use ChatGPT Plus.
 
 ### User data (using ~~chat.json~~ [chatId].json)
 When we make a request to `/_next/data/[build ID]/c/[conversation ID].json?chatId=[conversation ID]` (can be done in the browser, cannot be done without authentication), we get a response like this:
