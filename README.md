@@ -82,18 +82,23 @@ ChatGPT is a NextJS application. Server information cannot be clearly found as t
 
 ## Data
 ### Session data
-A request can be made to `/api/auth/session` (literally, **in your browser**, however cannot work in an iframe or fetch because it doesn't have a `Access-Control-Allow-Origin` set up) to access data like the following:
+A request can be made to `/api/auth/session` (without the `Authorization` header) to access data like the following:
 
 ```
- user
- |__ id: user-[redacted]
- |__ name: [redacted]@[redacted].com (probably can be a user's name)
- |__ email: [redacted]@[redacted].com
- |__ image: https://s.gravatar.com/avatar/8cf[redacted in case of possible unique identifier]2c7?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2F[first 2 letters of name].png
- |__ picture: https://s.gravatar.com/avatar/8cf[redacted in case of possible unique identifier]2c7?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2F[first 2 letters of name].png
- |__ groups: []
-expires: [date in the future]
-accessToken: ey[redacted] (base64 "{")
+user: (Object)
+|__ id: "user-[redacted]"
+|__ name: "[redacted]@[redacted].com"
+|__ email: "[redacted]@[redacted].com"
+|__ image: "https://s.gravatar.com/avatar/[MD5 hash of account email address]?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fte.png"
+|__ picture: "https://s.gravatar.com/avatar/[MD5 hash of account email address]?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fte.png"
+|__ idp: "auth0"
+|__ iat: 1690111234
+|__ mfa: [redacted]
+|__ groups: (Array)
+|__ intercom_hash: "[redacted]"
+expires: "2023-08-01T23:45:12.345Z"
+accessToken: "ey..[redacted].."
+authProvider: "auth0"
 ```
 
 ### User data
