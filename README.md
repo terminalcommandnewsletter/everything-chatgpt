@@ -177,21 +177,12 @@ models: (Array)
 |__ (Object)
 |____ slug: "text-davinci-002-render-sha"
 |____ max_tokens: 8191
-|____ title: "Turbo (Default for free users)"
+|____ title: "Default (GPT-3.5)"
 |____ description: "Our fastest model, great for most everyday tasks."
 |____ tags: (Array)
 |______ "gpt3.5"
-|____ qualitative_properties: (Object)
 |____ capabilities: (Object)
-|__ (Object)
-|____ slug: "text-davinci-002-render-sha-mobile"
-|____ max_tokens: 8191
-|____ title: "Turbo (Default for free users)"
-|____ description: "Our fastest model, great for most everyday tasks."
-|____ tags: (Array)
-|______ "mobile"
-|____ qualitative_properties: (Object)
-|____ capabilities: (Object)
+|____ product_features: (Object)
  categories: (Array)
 |__ (Object)
 |____ category: "gpt_3.5"
@@ -204,10 +195,6 @@ models: (Array)
 ```
 
 (There are more models if you use ChatGPT Plus, as shown in [issue #8](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/8), but this is what a Free user would see.)
-
-This means that ChatGPT can _remember context (based on what I can understand)_ for 32764 characters or 6143.25 words (or 2048.5 😀s).
-
-_* Approximation according to [OpenAI help article](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)_
 
 ### Disabling/Enabling "Chat History & Training"
 When you click your name/email address in the bottom-left corner of the screen (on desktop) > Settings > Show (next to Data Controls) > toggle next to Chat History and Training, the following happens:
