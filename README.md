@@ -17,6 +17,7 @@
   - [User data](#user-data)
   - [User data (using ~~chat.json~~ [chatId].json)](#user-data-using-chatjson-chatidjson)
   - [Model data](#model-data)
+  - [Beta Features Settings](#beta-features-settings)
   - [Disabling/Enabling "Chat History & Training"](#disablingenabling-chat-history--training)
   - [Data Export](#data-export)
 - [Conversation](#conversation)
@@ -201,6 +202,25 @@ models: (Array)
 ```
 
 (There are more models if you use ChatGPT Plus, as shown in [issue #8](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/8), but this is what a Free user would see.)
+
+### Beta Features Settings
+_Thanks to [@0xdevalias (on GitHub)](https://github.com/0xdevalias) for creating [issue #7](https://github.com/terminalcommandnewsletter/everything-chatgpt/issues/7) about this feature._
+
+On page load (as a Plus user), a request is made to `/backend-api/settings/beta_features`. This returns a response similar to this:
+```
+browsing: false
+chat_preferences: true
+code_interpreter: true
+plugins: true
+```
+
+The `browsing` key seems to refer to "Browse with Bing" (a feature disabled from public access currently, likely why it's set to `false` in the above data).
+
+The `chat_preferences` key refers to Custom Instructions, a new feature allowing users to set custom details persistent across chats.
+
+The `code_interpreter` key refers to the Code Interpreter feature which allows GPT to run code in a Python sandbox.
+
+The `plugins` key refers to ChatGPT Plugins.
 
 ### Disabling/Enabling "Chat History & Training"
 When you click your name/email address in the bottom-left corner of the screen (on desktop) > Settings > Show (next to Data Controls) > toggle next to Chat History and Training, the following happens:
