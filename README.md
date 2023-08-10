@@ -36,6 +36,7 @@
   - [Continuing a Shared Conversation](#continuing-a-shared-conversation)
   - [Listing Shared Conversations](#listing-shared-conversations)
   - [Deleting a Shared Conversation](#deleting-a-shared-conversation)
+  - [Setting Custom Instructions](#setting-custom-instructions)
 - [Errors](#errors)
   - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
   - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
@@ -46,7 +47,7 @@
   - [Access ChatGPT when it's down](#access-chatgpt-when-its-down)
 - [Rendering Markdown _inside_ a code block](#rendering-markdown-inside-a-code-block)
 - [Statsig Feature Gates](#statsig-feature-gates)
-- [Pages on the site](#pages-on-the-site)
+- [ChatGPT Admin Panel](#chatgpt-admin-panel)
 
 ## Fonts _([fonts.txt](./fonts.txt))_
 > **Warning**
@@ -537,7 +538,7 @@ Visiting the URL returns pre-rendered HTML of the conversation, with stylesheets
 
 ### Continuing a Shared Conversation
 
-When clicking `Continue conversation`, a request is made to `/_next/data/P7slZS66cy3khXMWyp3GF/share/37[redacted]05/continue.json?shareParams=37[redacted]05&shareParams=continue` with no request data and a *very* long response including data similar to that from [### User data (using [chatId].json)](#user-data-using-chatjson-chatidjson) as well as data about the conversation shared.
+When clicking `Continue conversation`, a request is made to `/_next/data/[build ID]/share/37[redacted]05/continue.json?shareParams=37[redacted]05&shareParams=continue` with no request data and a *very* long response including data similar to that from [User data (using [chatId].json)](#user-data-using-chatjson-chatidjson) as well as data about the conversation shared.
 
 ### Listing Shared Conversations
 A list of shared conversations can be found by sending a `GET` request (with the Authorization header to your auth token) to `/backend-api/shared_conversations?order=created` (without a request payload) which can return output like this:
@@ -561,6 +562,29 @@ A list of shared conversations can be found by sending a `GET` request (with the
 When you delete a shared conversation, a `DELETE` request is sent to `/backend-api/share/37[redacted]05` with no request body and the response `null`.
 
 After this, the web app [fetches the list of shared conversations](#listing-shared-conversations).
+
+### Setting Custom Instructions
+When the "Custom Instructions" menu is first opened, a `GET` request is sent to `/backend-api/user_system_messages` with an empty request body with a response:
+```
+object: "user_system_message_detail"
+enabled: true
+about_user_message: ""
+about_model_message: ""
+```
+
+When the user submits the form asking for personal information the model should know, as well as how the model should respond, a `POST` request is sent to `/backend-api/user_system_messages` with a request body like so:
+```
+about_user_message: "..."
+about_model_message: "..."
+enabled: false
+```
+and similar response:
+```
+object: "user_system_message_detail"
+enabled: false
+about_user_message: "..."
+about_model_message: "..."
+```
 
 ## Errors
 ### "_Something went wrong, please try reloading the conversation._"
@@ -654,27 +678,8 @@ That returns a 202 with a body of `{"success": true}`
 
 For some reason, this request repeats after that.
 
-## Pages on the site
-According to the build manifest (`/_next/static/[build ID]/_buildManifest.js`), these are the pages on the site:
-
-- `/`: `static/chunks/012ff928-bcfa62e3ac82441c.js, static/chunks/68a27ff6-b1db347c50639918.js, static/chunks/2802bd5f-15923fb46be55b45.js, static/chunks/bd26816a-7ae54dd3357d90b4.js, static/chunks/1f110208-cda4026aba1898fb.js, static/chunks/753-dd39befb4785e26d.js, static/chunks/984-1278472924e49180.js, static/chunks/801-b9a0a2b7a2313bf5.js, static/chunks/190-96274edf63fbfa45.js, static/chunks/937-edd834a8db5cd2db.js, static/chunks/412-900be3dfb2466166.js, static/chunks/pages/index-69f215b015206739.js`
-- `/_error` (404 error page): `static/chunks/pages/_error-fdab57c4b88e5b1c.js`
-- `/account/cancel`: `static/chunks/pages/account/cancel-164e4ecc13479ecd.js`
-- `/account/manage`: `static/chunks/pages/account/manage-c7a1640505b9cfd2.js`
-- `/account/upgrade` (account upgrade modal, but full page): `static/chunks/012ff928-bcfa62e3ac82441c.js, static/chunks/937-edd834a8db5cd2db.js, static/chunks/pages/account/upgrade-6329708d273f8758.js`
-- `/admin`: `static/chunks/68a27ff6-b1db347c50639918.js, static/chunks/753-dd39befb4785e26d.js, static/chunks/238-882950710bdd3e1e.js, static/chunks/190-96274edf63fbfa45.js, static/chunks/pages/admin-d4de41fecf7e5af7.js`
-- `/aip/[pluginId]/oauth/callback`: `static/chunks/pages/aip/[pluginId]/oauth/callback-b7d4a081f7ad5b5b.js`
-- `/auth/error` (error page): `static/chunks/pages/auth/error-9faed2db943661ab.js`
-- `/auth/ext_callback`: `static/chunks/pages/auth/ext_callback-7b50f284300a7ff6.js`
-- `/auth/ext_callback_refresh`: `static/chunks/pages/auth/ext_callback_refresh-47f3cd5abd2d99b6.js`
-- `/auth/login`: `static/chunks/564-f0043ba04d4fcd3d.js, static/chunks/pages/auth/login-267fffdf86e9e08a.js`
-- `/auth/logout`: `static/chunks/pages/auth/logout-5817b04f45f270e2.js`
-- `/auth/mocked_login` (mocked login, inaccessible): `static/chunks/pages/auth/mocked_login-060c0092bc682b49.js`
-- `/bypass` (unknown): `static/chunks/pages/bypass-979cf95f72688cf4.js`
-- `/c/[chatId]`: `static/chunks/pages/c/[chatId]-9f93c8708cf2909d.js`
-- `/payments/success` (Payment success screen with confetti): `static/chunks/pages/payments/success-a86ae956e75e1aa4.js`
-- `/share/[[...shareParams]]` (share links): `static/chunks/012ff928-bcfa62e3ac82441c.js, static/chunks/68a27ff6-b1db347c50639918.js, static/chunks/2802bd5f-15923fb46be55b45.js, static/chunks/bd26816a-7ae54dd3357d90b4.js, static/chunks/1f110208-cda4026aba1898fb.js, static/chunks/753-dd39befb4785e26d.js, static/chunks/984-1278472924e49180.js, static/chunks/801-b9a0a2b7a2313bf5.js, static/chunks/190-96274edf63fbfa45.js, static/chunks/937-edd834a8db5cd2db.js, static/chunks/412-900be3dfb2466166.js, static/chunks/pages/share/[[...shareParams]]-63351ba010c26bd0.js`
-- `/status` (ChatGPT down page): `static/chunks/564-f0043ba04d4fcd3d.js, static/chunks/pages/status-9047ec54adb32ef3.js`
+## ChatGPT Admin Panel
+I recently discovered an admin panel for ChatGPT (seemingly for an organization system) so I wrote what I found in [this Twitter thread](https://twitter.com/tercmd/status/1689642734829936640). This isn't public as of Aug 10, 2023.
 
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
