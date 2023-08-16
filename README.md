@@ -9,45 +9,7 @@
 
 </div>
 
-## Table of Contents
-- [Fonts (fonts.txt)](#fonts-fontstxt)
-- [Application](#application)
-- [Data](#data)
-  - [Session data](#session-data)
-  - [User data](#user-data)
-  - [User data (using ~~chat.json~~ [chatId].json)](#user-data-using-chatjson-chatidjson)
-  - [Model data](#model-data)
-  - [Beta Features Settings](#beta-features-settings)
-  - [Disabling/Enabling "Chat History & Training"](#disablingenabling-chat-history--training)
-  - [Data Export](#data-export)
-- [Conversation](#conversation)
-  - [Conversation History](#conversation-history)
-  - [Getting the Conversation ID](#getting-the-conversation-id)
-  - [Loading a Past Conversation](#loading-a-past-conversation)
-  - [The process of asking ChatGPT a question](#the-process-of-asking-chatgpt-a-question)
-  - [(Soft)Deleting a conversation](#softdeleting-a-conversation)
-  - [Can you revive a conversation?](#can-you-revive-a-conversation)
-  - [Clearing Conversations](#clearing-conversations)
-  - [Leaving Feedback on Messages (Thumbs Up/Thumbs Down)](#leaving-feedback-on-messages-thumbs-upthumbs-down)
-  - [Leaving Feedback (on Regenerated Responses)](#leaving-feedback-on-regenerated-responses)
-  - [Renaming Conversations](#renaming-conversations)
-  - [Continuing a ChatGPT response](#continuing-a-chatgpt-response)
-  - [Sharing Conversations](#sharing-conversations)
-  - [Continuing a Shared Conversation](#continuing-a-shared-conversation)
-  - [Listing Shared Conversations](#listing-shared-conversations)
-  - [Deleting a Shared Conversation](#deleting-a-shared-conversation)
-  - [Setting Custom Instructions](#setting-custom-instructions)
-- [Errors](#errors)
-  - ["_Something went wrong, please try reloading the conversation._"](#something-went-wrong-please-try-reloading-the-conversation)
-  - ["_The message you submitted was too long, please reload the conversation and submit something shorter._"](#the-message-you-submitted-was-too-long-please-reload-the-conversation-and-submit-something-shorter)
-  - ["_Conversation not found_"](#conversation-not-found)
-- [Markdown rendering](#markdown-rendering)
-- [ChatGPT Plus](#chatgpt-plus)
-  - [GPT-4 for Free Users? (nope)](#gpt-4-for-free-users-nope)
-  - [Access ChatGPT when it's down](#access-chatgpt-when-its-down)
-- [Rendering Markdown _inside_ a code block](#rendering-markdown-inside-a-code-block)
-- [Statsig Feature Gates](#statsig-feature-gates)
-- [ChatGPT Admin Panel](#chatgpt-admin-panel)
+The repo no longer contains a Table of Contents because GitHub already shows this.
 
 ## Fonts _([fonts.txt](./fonts.txt))_
 > **Warning**
@@ -680,6 +642,9 @@ For some reason, this request repeats after that.
 
 ## ChatGPT Admin Panel
 I recently discovered an admin panel for ChatGPT (seemingly for an organization system) so I wrote what I found in [this Twitter thread](https://twitter.com/tercmd/status/1689642734829936640). This isn't public as of Aug 10, 2023.
+
+## Prompt Library
+ChatGPT has some example prompts appear on the home screen. These are fetched by a `GET` request to `/backend-api/prompt_library/?limit=4&offset=0` (requiring the `Authorization` header). The highest value for `limit` that returns a `200 OK` is `14`. The prompts returned each time are different. So, I used JS to send the same request a large number of times and then filter the unique ones. You can find all the prompts in [prompt-library.txt](./prompt-library.txt).
 
 ## Conclusion
 This is it. For now. As I see more details of ChatGPT, I'll add those in.
